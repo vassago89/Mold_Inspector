@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Controls.Views.NumericButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SeparatorBackground}"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SeparatorBackground}"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}" VerticalContentAlignment="Center"
+                 TextChanged="TextBox_TextChanged"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Command="{Binding UpCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}">
+                <TextBlock TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE96D;" FontSize="6"/>
+            </Button>
+            <Button Grid.Row="1" Command="{Binding DownCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}">
+                <TextBlock TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE96E;" FontSize="6"/>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

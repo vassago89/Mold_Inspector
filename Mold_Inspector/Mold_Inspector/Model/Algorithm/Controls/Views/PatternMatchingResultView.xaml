@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Mold_Inspector.Model.Algorithm.Controls.Views.PatternMatchingResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <controls:AlgorithmResultColorConverter x:Key="Converter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Canvas>
+            <Rectangle Canvas.Left="{Binding ResultRegion.X}"
+                       Canvas.Top="{Binding ResultRegion.Y}"
+                       Width="{Binding ResultRegion.Width}" 
+                       Height="{Binding ResultRegion.Height}" 
+                       Stroke="{Binding Pass, Converter={StaticResource Converter}}"
+                       StrokeDashArray="1 1"
+                       StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource AncestorType=controls:ResultView, Mode=FindAncestor}}"/>
+            <Line X1="{Binding ResultCenter.X}" 
+                  Y1="{Binding ResultCenter.Y}"
+                  X2="{Binding Center.X}"
+                  Y2="{Binding Center.Y}"
+                  StrokeDashArray="1 1"
+                  StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource AncestorType=controls:ResultView, Mode=FindAncestor}}"
+                  Stroke="{Binding Pass, Converter={StaticResource Converter}}"/>
+            <Grid Canvas.Left="{Binding ResultRegion.X}"
+                  Canvas.Top="{Binding ResultRegion.Y}" >
+                <TextBlock Margin="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource AncestorType=controls:ResultView, Mode=FindAncestor}}"
+                           Text="{Binding Score, StringFormat=Score : {0:0.00}}"
+                           FontSize="{Binding ZoomService.FontThickness, RelativeSource={RelativeSource AncestorType=controls:ResultView, Mode=FindAncestor}}"
+                           Foreground="{Binding Pass, Converter={StaticResource Converter}}"/>
+            </Grid>
+        </Canvas>
+    </Grid>
+</UserControl>

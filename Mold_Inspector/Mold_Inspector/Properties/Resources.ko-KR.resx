@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Absolute" xml:space="preserve">
+    <value>절대</value>
+  </data>
+  <data name="Accent" xml:space="preserve">
+    <value>강조</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>추가</value>
+  </data>
+  <data name="Alarm" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="Alram" xml:space="preserve">
+    <value>알람</value>
+  </data>
+  <data name="Auto" xml:space="preserve">
+    <value>자동</value>
+  </data>
+  <data name="Binary" xml:space="preserve">
+    <value>이진</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>진행</value>
+  </data>
+  <data name="C/S" xml:space="preserve">
+    <value>여분</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>카메라</value>
+  </data>
+  <data name="Camera ID" xml:space="preserve">
+    <value>카메라 아이디</value>
+  </data>
+  <data name="Candidate" xml:space="preserve">
+    <value>후보</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>클리어</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>닫힘</value>
+  </data>
+  <data name="Closing" xml:space="preserve">
+    <value>닫기 시작</value>
+  </data>
+  <data name="Common" xml:space="preserve">
+    <value>공통</value>
+  </data>
+  <data name="Complate" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>연결</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>제어</value>
+  </data>
+  <data name="Current Recipe" xml:space="preserve">
+    <value>현재 레시피</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>어두운</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>기본값</value>
+  </data>
+  <data name="Display Columns" xml:space="preserve">
+    <value>보이기 (열)</value>
+  </data>
+  <data name="Display Rows" xml:space="preserve">
+    <value>보이기 (행)</value>
+  </data>
+  <data name="Door" xml:space="preserve">
+    <value>문</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>수정</value>
+  </data>
+  <data name="Eject" xml:space="preserve">
+    <value>돌출</value>
+  </data>
+  <data name="Eject Delay" xml:space="preserve">
+    <value>돌출 지연</value>
+  </data>
+  <data name="Ejected" xml:space="preserve">
+    <value>돌출됨</value>
+  </data>
+  <data name="Ejecting" xml:space="preserve">
+    <value>돌출 시작</value>
+  </data>
+  <data name="en-US" xml:space="preserve">
+    <value>영어</value>
+  </data>
+  <data name="Grab" xml:space="preserve">
+    <value>촬상</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>높이</value>
+  </data>
+  <data name="Histogram" xml:space="preserve">
+    <value>히스토그램</value>
+  </data>
+  <data name="Horizontal" xml:space="preserve">
+    <value>수평</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>아이디</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>영상</value>
+  </data>
+  <data name="Inflate Height" xml:space="preserve">
+    <value>확장 높이</value>
+  </data>
+  <data name="Inflate Width" xml:space="preserve">
+    <value>확장 넓이</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>입력</value>
+  </data>
+  <data name="Inspect" xml:space="preserve">
+    <value>검사</value>
+  </data>
+  <data name="Invert" xml:space="preserve">
+    <value>반전</value>
+  </data>
+  <data name="IO" xml:space="preserve">
+    <value>입출력</value>
+  </data>
+  <data name="ko-KR" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>밝은</value>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>라이브</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>잠금</value>
+  </data>
+  <data name="Lower" xml:space="preserve">
+    <value>최소</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>주 화면</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>수동</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>제조사</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>메뉴</value>
+  </data>
+  <data name="Method" xml:space="preserve">
+    <value>방법</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>모드</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>모델</value>
+  </data>
+  <data name="Mold" xml:space="preserve">
+    <value>성형</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="NG" xml:space="preserve">
+    <value>불</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>양</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="Orientation" xml:space="preserve">
+    <value>방향</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>출력</value>
+  </data>
+  <data name="Pattern" xml:space="preserve">
+    <value>패턴</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>백분율</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>포트</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>준비</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>제품</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>프로파일</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>범위</value>
+  </data>
+  <data name="Re-Eject" xml:space="preserve">
+    <value>재돌출</value>
+  </data>
+  <data name="Re-Eject Count" xml:space="preserve">
+    <value>재돌출 횟수</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>준비</value>
+  </data>
+  <data name="Recipe" xml:space="preserve">
+    <value>레시피</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>갱신</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>등록</value>
+  </data>
+  <data name="Registration Date" xml:space="preserve">
+    <value>등록일</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>재시작</value>
+  </data>
+  <data name="Robot" xml:space="preserve">
+    <value>로봇</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>점수</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="Serial No" xml:space="preserve">
+    <value>시리얼 번호</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>세트</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>세팅</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>상태</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>현황</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>목표</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>테마</value>
+  </data>
+  <data name="Threshold" xml:space="preserve">
+    <value>임계치</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>타입</value>
+  </data>
+  <data name="Upper" xml:space="preserve">
+    <value>최대</value>
+  </data>
+  <data name="Use Ejected" xml:space="preserve">
+    <value>돌출됨 사용</value>
+  </data>
+  <data name="Use Re-Eject" xml:space="preserve">
+    <value>재돌출 사용</value>
+  </data>
+  <data name="Used Date" xml:space="preserve">
+    <value>사용일</value>
+  </data>
+  <data name="Vertical" xml:space="preserve">
+    <value>수직</value>
+  </data>
+  <data name="Wait" xml:space="preserve">
+    <value>대기</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>넓이</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>윈도우</value>
+  </data>
+  <data name="X" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="Zoom Fit" xml:space="preserve">
+    <value>맞춤</value>
+  </data>
+  <data name="Zoom In" xml:space="preserve">
+    <value>확대</value>
+  </data>
+  <data name="Zoom Out" xml:space="preserve">
+    <value>축소</value>
+  </data>
+</root>

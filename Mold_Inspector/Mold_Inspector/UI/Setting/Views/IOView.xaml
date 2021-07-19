@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Setting.Views.IOView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Setting.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource Heading2}">
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{DynamicResource DataGridForeground}"/>
+            </Style>
+        </Grid.Resources>
+        <UniformGrid Rows="1" Columns="2" Margin="4">
+            <StackPanel>
+                <UniformGrid Columns="2">
+                    <TextBlock Text="{loc:Loc Port}"/>
+                    <UniformGrid Rows="1">
+                        <ComboBox BorderBrush="{DynamicResource DataGridForeground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.PortName}" ItemsSource="{Binding Ports}" Margin="0 0 2 0"/>
+                        <Button Command="{Binding ConnectCommand}" BorderBrush="{DynamicResource DataGridCellForeground}" Margin="2 0 0 0">
+                            <TextBlock Text="{loc:Loc Connect}"/>
+                        </Button>
+                    </UniformGrid>
+                    <TextBlock Text="{loc:Loc Eject Delay}"/>
+                    <controls:NumericButton Value="{Binding IOStore.EjectDelay}"/>
+                    <TextBlock Text="{loc:Loc Use Ejected}"/>
+                    <CheckBox IsChecked="{Binding IOStore.UseEjectEnd}" HorizontalAlignment="Center" BorderBrush="{DynamicResource SeparatorBackground}"/>
+                    <TextBlock Text="{loc:Loc Use Re-Eject}"/>
+                    <CheckBox IsChecked="{Binding IOStore.UseReEject}" HorizontalAlignment="Center" BorderBrush="{DynamicResource SeparatorBackground}"/>
+                    <TextBlock Text="{loc:Loc Re-Eject Count}"/>
+                    <controls:NumericButton IsEnabled="{Binding IOStore.UseReEject}" Value="{Binding IOStore.ReEjectCount}"/>
+                </UniformGrid>
+            </StackPanel>
+            <StackPanel>
+                <UniformGrid Columns="2">
+                    <TextBlock Text="{loc:Loc Open}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InOpen}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InOpen}"/>-->
+                    <TextBlock Text="{loc:Loc Ejected}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InEjected}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InEjected}"/>-->
+                    <TextBlock Text="{loc:Loc OK}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InOK}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InOK}"/>-->
+                    <TextBlock Text="{loc:Loc NG}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InNG}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InNG}"/>-->
+                    <TextBlock Text="{loc:Loc Set}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InSet}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InSet}"/>-->
+                    <TextBlock Text="{loc:Loc Restart}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InRestart}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InRestart}"/>-->
+                    <TextBlock Text="{loc:Loc Door}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.InDoor}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.InDoor}"/>-->
+
+                    <TextBlock Text="{loc:Loc Close}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutClose}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutClose}"/>-->
+                    <TextBlock Text="{loc:Loc Eject}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutEject}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutEject}"/>-->
+                    <TextBlock Text="{loc:Loc Robot}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutRobot}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutRobot}"/>-->
+                    <TextBlock Text="{loc:Loc Re-Eject}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutReEject}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutReEject}"/>-->
+                    <TextBlock Text="{loc:Loc Alram}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutAlram}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutAlram}"/>-->
+                    <TextBlock Text="{loc:Loc C/S}"/>
+                    <controls:NumericButton Value="{Binding IOStore.IOPort.OutCS}"/>
+                    <!--<TextBox Text="{Binding IOStore.IOPort.OutCS}"/>-->
+                </UniformGrid>
+            </StackPanel>
+        </UniformGrid>
+    </Grid>
+</UserControl>

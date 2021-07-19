@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Mold_Inspector.Model.Algorithm.Controls.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:liveChart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"> 
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BVConverter"/>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <liveChart:CartesianChart Visibility="{Binding IsHorizontal, Converter={StaticResource BVConverter}}"  LegendLocation="None" DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}" 
+                                          Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel, Mode=FindAncestor}}" >
+                    <liveChart:CartesianChart.AxisX>
+                        <liveChart:Axis MinValue="0" Labels="0">
+                            <liveChart:Axis.Separator>
+                                <liveChart:Separator StrokeThickness="0"/>
+                            </liveChart:Axis.Separator>
+                        </liveChart:Axis>
+                    </liveChart:CartesianChart.AxisX>
+                    <liveChart:CartesianChart.AxisY>
+                        <liveChart:Axis MinValue="0" MaxValue="256">
+                            <liveChart:Axis.Separator>
+                                <liveChart:Separator StrokeThickness="0" Step="25"/>
+                            </liveChart:Axis.Separator>
+                        </liveChart:Axis>
+                    </liveChart:CartesianChart.AxisY>
+                    <liveChart:CartesianChart.Series>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding ChartValues}"/>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding LowerValues}"/>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding UpperValues}"/>
+                    </liveChart:CartesianChart.Series>
+                </liveChart:CartesianChart>
+                <liveChart:CartesianChart Visibility="{Binding IsVertical, Converter={StaticResource BVConverter}}" 
+                                          LegendLocation="None" 
+                                          DisableAnimations="True" 
+                                          Hoverable="False" 
+                                          DataTooltip="{x:Null}" 
+                                          Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel, Mode=FindAncestor}}" 
+                                          Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel, Mode=FindAncestor}}" 
+                                          RenderTransformOrigin="0.5 0.5">
+                    <liveChart:CartesianChart.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </liveChart:CartesianChart.RenderTransform>
+                    <liveChart:CartesianChart.AxisX>
+                        <liveChart:Axis MinValue="0" Labels="0">
+                            <liveChart:Axis.Separator>
+                                <liveChart:Separator StrokeThickness="0"/>
+                            </liveChart:Axis.Separator>
+                        </liveChart:Axis>
+                    </liveChart:CartesianChart.AxisX>
+                    <liveChart:CartesianChart.AxisY>
+                        <liveChart:Axis MinValue="0" MaxValue="256">
+                            <liveChart:Axis.Separator>
+                                <liveChart:Separator StrokeThickness="0" Step="25"/>
+                            </liveChart:Axis.Separator>
+                        </liveChart:Axis>
+                    </liveChart:CartesianChart.AxisY>
+                    <liveChart:CartesianChart.Series>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding ChartValues}"/>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding LowerValues}"/>
+                        <liveChart:LineSeries PointGeometrySize="0" Fill="Transparent" StrokeThickness="3" Values="{Binding UpperValues}"/>
+                    </liveChart:CartesianChart.Series>
+                </liveChart:CartesianChart>
+                <UniformGrid Columns="2" Margin="0 4">
+                    <TextBlock Text="{loc:Loc Orientation}"/>
+                    <ComboBox Margin="-2" DisplayMemberPath="" SelectedItem="{Binding Algorithm.Orientation}" ItemsSource="{Binding Algorithm.Orientations}" BorderBrush="{DynamicResource SeparatorBackground}" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{loc:Loc {Binding }}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="{loc:Loc Mode}"/>
+                    <ComboBox Margin="-2" SelectedItem="{Binding Algorithm.ProfileMode}" ItemsSource="{Binding Algorithm.ProfileModes}" BorderBrush="{DynamicResource SeparatorBackground}" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{loc:Loc {Binding }}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="{loc:Loc Lower}" IsEnabled="{Binding IsAbsolute}"/>
+                    <controls:NumericButton Value="{Binding Algorithm.Lower}" VerticalContentAlignment="Center" IsEnabled="{Binding IsAbsolute}"/>
+                    <TextBlock Text="{loc:Loc Upper}" IsEnabled="{Binding IsAbsolute}"/>
+                    <controls:NumericButton Value="{Binding Algorithm.Upper}" VerticalContentAlignment="Center" IsEnabled="{Binding IsAbsolute}"/>
+                    <TextBlock Text="{loc:Loc Range}" IsEnabled="{Binding IsRange}"/>
+                    <controls:NumericButton Value="{Binding Algorithm.Range}" VerticalContentAlignment="Center" IsEnabled="{Binding IsRange}"/>
+                </UniformGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

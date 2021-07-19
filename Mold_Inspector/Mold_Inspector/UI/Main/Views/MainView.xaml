@@ -1,0 +1,195 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Main.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Main.Views"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             xmlns:algorithm="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:BooleanInverter x:Key="Inverter"/>
+        <BooleanToVisibilityConverter x:Key="Converter"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridForeground}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource Accent}"/>
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Accent}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.25"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridForeground}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Accent}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.25"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridForeground}"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding StateStore.IsTeachMode}">
+                    <StackPanel Orientation="Horizontal" Margin="4 4 4 0">
+                        <TextBlock Text="{loc:Loc Control}" Style="{StaticResource Emphasis}" VerticalAlignment="Center"/>
+                        <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
+                        <Button Command="{Binding InspectCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE11A;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Inspect}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding ClearCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE895;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Clear}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding GrabCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE722;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Grab}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding LiveCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE20A;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Live}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="4 4 4 0">
+                        <TextBlock Text="{loc:Loc Mode}" Style="{StaticResource Emphasis}" VerticalAlignment="Center"/>
+                        <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
+                        <RadioButton IsChecked="{Binding TeachingStore.IsProductionMode}" Command="{Binding ProductionCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA3A;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Production}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton IsChecked="{Binding TeachingStore.IsMoldMode}" Command="{Binding MoldCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA3B;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Mold}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4 4 4 0"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding StateStore.IsTeachMode}">
+                    <StackPanel Orientation="Horizontal" Margin="4 4 4 0" IsEnabled="{Binding TeachingStore.IsLock, Converter={StaticResource Inverter}}">
+                        <TextBlock Text="{loc:Loc Window}" VerticalAlignment="Center" Style="{StaticResource Emphasis}"/>
+                        <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
+                        <RadioButton IsChecked="{Binding TeachingStore.IsNone}" Command="{Binding NoneCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE10A;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc None}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Command="{Binding PatternCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE158;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Pattern}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Command="{Binding BinaryCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA61;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Binary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Command="{Binding ProfileCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xF463;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Profile}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <Button Command="{Binding RemoveCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE107;" FontSize="16" Margin="0 0 4 0"/>
+                                <TextBlock Text="{loc:Loc Remove}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <ToggleButton IsChecked="{Binding TeachingStore.IsLock}" Margin="0 6 6 2" Command="{Binding NoneCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8D7;" FontSize="16" Margin="0 0 4 0"/>
+                            <TextBlock Text="{loc:Loc Lock}"/>
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+                <ItemsControl Grid.Row="2" ItemsSource="{Binding CameraStore.Cameras}" IsEnabled="{Binding StateStore.IsTeachMode}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="{Binding CommonStore.Cols}" Rows="{Binding CommonStore.Rows}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Background="Gray" BorderThickness="1" Margin="4" BorderBrush="{DynamicResource DataGridCellForeground}">
+                                    <controls:CameraView ID="{Binding DataContext.ID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+            <Border Grid.Column="1" BorderBrush="{DynamicResource DataGridCellForeground}" BorderThickness="1" Margin="-1">
+                <Grid Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="4">
+                        <TextBlock Text="{loc:Loc Current Recipe}" Style="{StaticResource Title}"/>
+                        <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="0 4"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding RecipeStore.Selected.Name}" Style="{StaticResource Heading2}" HorizontalAlignment="Center"/>
+                        <Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="0 4"/>
+                    </StackPanel>
+                    <local:AutoModeView Margin="4" Grid.Row="1" Visibility="{Binding DataContext.StateStore.IsAutoMode, RelativeSource={RelativeSource AncestorType=local:MainView, Mode=FindAncestor},Converter={StaticResource Converter}}"/>
+                    <local:TeachModeView Margin="4" Grid.Row="1" Visibility="{Binding DataContext.StateStore.IsTeachMode, RelativeSource={RelativeSource AncestorType=local:MainView, Mode=FindAncestor},Converter={StaticResource Converter}}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

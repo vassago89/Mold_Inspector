@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Controls.Views.WindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             xmlns:algorithm="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <algorithm:AdditionalDataTemplateSelector x:Key="Selector"/>
+        <local:CraeteConverter x:Key="CraeteConverter"/>
+        <local:SelectionConverter x:Key="SelectionConverter"/>
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Canvas>
+        <ItemsControl ItemsSource="{Binding WindowStore.BackgroundWindows}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Grid Canvas.Left="{Binding Region.X}"
+                              Canvas.Top="{Binding Region.Y}"
+                              Width="{Binding Region.Width}" 
+                              Height="{Binding Region.Height}"
+                              Opacity="0.25">
+                            <Rectangle StrokeDashArray="1 2"
+                                       Stroke="Yellow"
+                                       StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                            <TextBlock Text="{loc:Loc {Binding Algorithm.AlgorithmType}}" 
+                                       FontSize="{Binding ZoomService.FontThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"
+                                       Foreground="Yellow">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=TextBlock, Mode=FindAncestor}}"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding WindowStore.CurrentWindows}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Grid Canvas.Left="{Binding Region.X}"
+                              Canvas.Top="{Binding Region.Y}"
+                              Width="{Binding Region.Width}" 
+                              Height="{Binding Region.Height}">
+                            <Rectangle Stroke="Yellow"
+                                       StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                            <TextBlock Text="{loc:Loc {Binding Algorithm.AlgorithmType}}" 
+                                       FontSize="{Binding ZoomService.FontThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"
+                                       Foreground="Yellow">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=TextBlock, Mode=FindAncestor}}"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding WindowStore.SelectedWindows}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle Canvas.Left="{Binding Region.X}"
+                                    Canvas.Top="{Binding Region.Y}"
+                                    Width="{Binding Region.Width}" 
+                                    Height="{Binding Region.Height}" 
+                                    Stroke="{DynamicResource Accent}"
+                                    StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding WindowStore.NextWindows}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle Canvas.Left="{Binding Region.X}"
+                                   Canvas.Top="{Binding Region.Y}"
+                                   Width="{Binding Region.Width}" 
+                                   Height="{Binding Region.Height}" 
+                                   Stroke="{DynamicResource Accent}"
+                                   Opacity="0.75"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Canvas Visibility="{Binding MouseStore.Command, Converter={StaticResource CraeteConverter}}">
+            <Rectangle Canvas.Left="{Binding WindowStore.Region.X}"
+                       Canvas.Top="{Binding WindowStore.Region.Y}"
+                       Width="{Binding WindowStore.Region.Width}" 
+                       Height="{Binding WindowStore.Region.Height}" 
+                       Stroke="{DynamicResource Accent}"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="{Binding ZoomService.OverlayThickness}"/>
+        </Canvas>
+        <Canvas Visibility="{Binding MouseStore.Command, Converter={StaticResource SelectionConverter}}">
+            <Rectangle Canvas.Left="{Binding WindowStore.Region.X}"
+                       Canvas.Top="{Binding WindowStore.Region.Y}"
+                       Width="{Binding WindowStore.Region.Width}" 
+                       Height="{Binding WindowStore.Region.Height}" 
+                       Stroke="Yellow"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="{Binding ZoomService.OverlayThickness}"/>
+        </Canvas>
+        <Canvas Visibility="{Binding WindowStore.Selected, Converter={StaticResource NullToVisibilityConverter}}">
+            <Rectangle Canvas.Left="{Binding WindowStore.Selected.Region.X}"
+                       Canvas.Top="{Binding WindowStore.Selected.Region.Y}"
+                       Width="{Binding WindowStore.Selected.Region.Width}" 
+                       Height="{Binding WindowStore.Selected.Region.Height}" 
+                       Stroke="{DynamicResource Accent}"
+                       StrokeThickness="{Binding ZoomService.OverlayThickness}"/>
+            <ContentPresenter Content="{Binding WindowStore.Selected.Algorithm}"
+                              ContentTemplateSelector="{StaticResource Selector}">
+                <ContentPresenter.Resources>
+                    <DataTemplate  x:Key="Pattern">
+                        <algorithm:PatternMatchingAdditionalView ZoomService="{Binding ZoomService, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                    </DataTemplate>
+                    <DataTemplate  x:Key="Binary">
+                        
+                    </DataTemplate>
+                    <DataTemplate  x:Key="Profile">
+                        <algorithm:ProfileAdditionalView ZoomService="{Binding ZoomService, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </Canvas>
+        <Canvas Visibility="{Binding WindowStore.NextSelected, Converter={StaticResource NullToVisibilityConverter}}">
+            <Rectangle Canvas.Left="{Binding WindowStore.NextSelected.Region.X}"
+                       Canvas.Top="{Binding WindowStore.NextSelected.Region.Y}"
+                       Width="{Binding WindowStore.NextSelected.Region.Width}" 
+                       Height="{Binding WindowStore.NextSelected.Region.Height}" 
+                       Stroke="{DynamicResource Accent}"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="{Binding ZoomService.OverlayThickness}"/>
+        </Canvas>
+    </Canvas>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Mold_Inspector.Model.Algorithm.Controls.Views.PatternMatchingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="Images" BorderThickness="1" BorderBrush="{DynamicResource SeparatorBackground}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding TeachingStore.Window.Algorithm.PatternMatchingImages}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=VirtualizingStackPanel}}"
+                            Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                            Background="Gray">
+                        <Image Source="{Binding Source}"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <StackPanel Grid.Row="1">
+            <UniformGrid Columns="3" Margin="4 0 0 0">
+                <Button Content="{loc:Loc Add}" Command="{Binding AddCommand}"/>
+                <Button Content="{loc:Loc Refresh}" Command="{Binding RefreshCommand}"/>
+                <Button Content="{loc:Loc Remove}" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem, ElementName=Images}"/>
+            </UniformGrid>
+            <UniformGrid Columns="2">
+                <TextBlock Text="{loc:Loc Method}"/>
+                <ComboBox Margin="-2" SelectedItem="{Binding TeachingStore.Window.Algorithm.PatternMatchingAlgorithmType}" ItemsSource="{Binding TeachingStore.Window.Algorithm.PatternMatchingAlgorithmTypes}" BorderBrush="{DynamicResource SeparatorBackground}" VerticalAlignment="Center"/>
+                <TextBlock Text="{loc:Loc Score}"/>
+                <controls:NumericButton Value="{Binding TeachingStore.Window.Algorithm.Score}" VerticalAlignment="Center"/>
+                <TextBlock Text="{loc:Loc Inflate Width}"/>
+                <controls:NumericButton Value="{Binding TeachingStore.Window.Algorithm.InflateWidth}" VerticalAlignment="Center"/>
+                <TextBlock Text="{loc:Loc Inflate Height}"/>
+                <controls:NumericButton Value="{Binding TeachingStore.Window.Algorithm.InflateHeight}" VerticalContentAlignment="Center"/>
+            </UniformGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

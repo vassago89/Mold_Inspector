@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Main.Views.TeachModeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:algorithm="clr-namespace:Mold_Inspector.Model.Algorithm.Controls.Views"
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Main.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <algorithm:AlgorithmDataTemplateSelector x:Key="Selector"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{loc:Loc Window}" Style="{StaticResource Title}"/>
+            <Border Grid.Row="1" Margin="0 4" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource SeparatorBackground}"/>
+            <Grid Grid.Row="2">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <UniformGrid Rows="1">
+                    <TextBlock Text="{loc:Loc Camera ID}"/>
+                    <TextBlock Text="{Binding TeachingStore.Window.CameraID}"/>
+                </UniformGrid>
+                <UniformGrid Margin="4" Grid.Row="1" Columns="4" Rows="2">
+                    <TextBlock Text="{loc:Loc X}"/>
+                    <TextBlock Text="{Binding TeachingStore.Window.Region.X}"/>
+                    <TextBlock Text="{loc:Loc Y}"/>
+                    <TextBlock Text="{Binding TeachingStore.Window.Region.Y}"/>
+                    <TextBlock Text="{loc:Loc Width}"/>
+                    <TextBlock Text="{Binding TeachingStore.Window.Region.Width}"/>
+                    <TextBlock Text="{loc:Loc Height}"/>
+                    <TextBlock Text="{Binding TeachingStore.Window.Region.Height}"/>
+                </UniformGrid>
+            </Grid>
+            <Border Grid.Row="3" Margin="0 4" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource SeparatorBackground}"/>
+            <TextBlock Grid.Row="4" Text="{loc:Loc {Binding TeachingStore.Window.Algorithm.AlgorithmType}}" Style="{StaticResource Title}"/>
+            <Border Grid.Row="5" Margin="0 4" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource SeparatorBackground}"/>
+            <ContentPresenter Margin="4" Grid.Row="7" Content="{Binding TeachingStore.Window.Algorithm}" ContentTemplateSelector="{StaticResource Selector}">
+                <ContentPresenter.Resources>
+                    <DataTemplate  x:Key="Pattern">
+                        <algorithm:PatternMatchingView/>
+                    </DataTemplate>
+                    <DataTemplate  x:Key="Binary">
+                        <algorithm:BinaryCountView/>
+                    </DataTemplate>
+                    <DataTemplate  x:Key="Profile">
+                        <algorithm:ProfileView/>
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </Grid>
+    </Grid>
+</UserControl>

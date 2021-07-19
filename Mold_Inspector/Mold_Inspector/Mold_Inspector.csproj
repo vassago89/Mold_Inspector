@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\OpenCvSharp4.runtime.win.4.5.2.20210404\build\net\OpenCvSharp4.runtime.win.props" Condition="Exists('..\packages\OpenCvSharp4.runtime.win.4.5.2.20210404\build\net\OpenCvSharp4.runtime.win.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FD97E66D-A1D0-4903-8957-4B5C44B1B8AA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Mold_Inspector</RootNamespace>
+    <AssemblyName>Mold_Inspector</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Basler.Pylon, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e389355f398382ab, processorArchitecture=AMD64" />
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="MvCameraControl.Net">
+      <HintPath>..\ThirdParty\MvCameraControl.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.4.5.2.20210404\lib\net461\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.4.5.2.20210404\lib\net461\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.WpfExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.WpfExtensions.4.5.2.20210404\lib\net461\OpenCvSharp.WpfExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Plugin.Logging.Abstractions, Version=7.2.0.1421, Culture=neutral, PublicKeyToken=fbfaf746d14111cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Plugin.Logging.Abstractions.7.2.0.1421\lib\net462\Prism.Plugin.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Plugin.Logging.Common, Version=7.2.0.1421, Culture=neutral, PublicKeyToken=fbfaf746d14111cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Plugin.Logging.Common.7.2.0.1421\lib\netstandard2.0\Prism.Plugin.Logging.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Plugin.Logging.Syslog, Version=7.2.0.1421, Culture=neutral, PublicKeyToken=fbfaf746d14111cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Plugin.Logging.Syslog.7.2.0.1421\lib\netstandard2.0\Prism.Plugin.Logging.Syslog.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.8.1.97\lib\net47\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.8.1.97\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTools, Version=3.1.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyTools.3.1.0\lib\net45\PropertyTools.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTools.Wpf, Version=3.1.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyTools.Wpf.3.1.0\lib\net45\PropertyTools.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.11\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFLocalizeExtension, Version=3.8.0.0, Culture=neutral, PublicKeyToken=c726e0262981a1eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFLocalizeExtension.3.8.0\lib\net452\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c726e0262981a1eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAMLMarkupExtensions.2.0.0\lib\net472\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.11.2.0\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Config\Abstract\BinaryConfig.cs" />
+    <Compile Include="Config\Abstract\IConfig.cs" />
+    <Compile Include="Config\Abstract\JsonConfig.cs" />
+    <Compile Include="Config\DefaultConfig.cs" />
+    <Compile Include="Config\CommonConfig.cs" />
+    <Compile Include="Config\CameraConfig.cs" />
+    <Compile Include="Config\IOConfig.cs" />
+    <Compile Include="Config\RecipeConfig.cs" />
+    <Compile Include="Device\CameraServiceMediator.cs" />
+    <Compile Include="Device\Camera\CameraInfo.cs" />
+    <Compile Include="Device\Camera\Baslers\BaslerCameraFactory.cs" />
+    <Compile Include="Device\Camera\GrabInfo.cs" />
+    <Compile Include="Device\Camera\Hiks\HikCameraFactory.cs" />
+    <Compile Include="Device\Camera\ICameraFactory.cs" />
+    <Compile Include="Device\Camera\Baslers\BaslerCamera.cs" />
+    <Compile Include="Device\Camera\Hiks\HikCamera.cs" />
+    <Compile Include="Device\Camera\ICamera.cs" />
+    <Compile Include="Device\Camera\ParameterInfo.cs" />
+    <Compile Include="Device\CameraService.cs" />
+    <Compile Include="Device\IO\IOController.cs" />
+    <Compile Include="Device\IO\Serial\KM6050IOController.cs" />
+    <Compile Include="Device\IO\VirtualIOController.cs" />
+    <Compile Include="Model\Algorithm\AlgorihtmType.cs" />
+    <Compile Include="Model\Algorithm\BinaryCount\BinaryCountAlgorithm.cs" />
+    <Compile Include="Model\Algorithm\BinaryCount\BinaryCountResult.cs" />
+    <Compile Include="Model\Algorithm\Controls\ViewModels\BinaryCountViewModel.cs" />
+    <Compile Include="Model\Algorithm\Controls\ViewModels\ProfileAdditionalViewModel.cs" />
+    <Compile Include="Model\Algorithm\Controls\ViewModels\PatternMatchingAdditionalViewModel.cs" />
+    <Compile Include="Model\Algorithm\Controls\ViewModels\ProfileViewModel.cs" />
+    <Compile Include="Model\Algorithm\Controls\Views\AdditionalDataTemplateSelector.cs" />
+    <Compile Include="Model\Algorithm\Controls\Views\AlgorithmDataTemplateSelector.cs" />
+    <Compile Include="Model\Algorithm\Controls\ViewModels\PatternMatchingViewModel.cs" />
+    <Compile Include="Model\Algorithm\Controls\Views\ProfileResultView.xaml.cs">
+      <DependentUpon>ProfileResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\BinaryCountView.xaml.cs">
+      <DependentUpon>BinaryCountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\ProfileAdditionalView.xaml.cs">
+      <DependentUpon>ProfileAdditionalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\PatternMatchingAdditionalView.xaml.cs">
+      <DependentUpon>PatternMatchingAdditionalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\BinaryCountResultView.xaml.cs">
+      <DependentUpon>BinaryCountResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\PatternMatchingResultView.xaml.cs">
+      <DependentUpon>PatternMatchingResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\PatternMatchingView.xaml.cs">
+      <DependentUpon>PatternMatchingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Algorithm\Controls\Views\AlgorithmResultDataTemplateSelector.cs" />
+    <Compile Include="Model\Algorithm\IAlgorithm.cs" />
+    <Compile Include="Model\Algorithm\IAlgorithmResult.cs" />
+    <Compile Include="Model\Algorithm\PatternMatching\PatternMatchingAlgorithm.cs" />
+    <Compile Include="Model\Algorithm\PatternMatching\PatternMatchingImage.cs" />
+    <Compile Include="Model\Algorithm\PatternMatching\PatternMatchingResult.cs" />
+    <Compile Include="Model\Algorithm\Profile\ProfileAlgorithm.cs" />
+    <Compile Include="Model\Algorithm\Profile\ProfileResult.cs" />
+    <Compile Include="Model\ObservableDictionary.cs" />
+    <Compile Include="Model\Recipe.cs" />
+    <Compile Include="Model\Selection\CommandStack.cs" />
+    <Compile Include="Model\Selection\Command.cs" />
+    <Compile Include="Model\Selection\SelectDirection.cs" />
+    <Compile Include="Model\Selection\ZoomService.cs" />
+    <Compile Include="Model\Window.cs" />
+    <Compile Include="Service\InspectService.cs" />
+    <Compile Include="Store\CameraStore.cs" />
+    <Compile Include="Store\CommonStore.cs" />
+    <Compile Include="Store\Abstract\ConfigStore.cs" />
+    <Compile Include="Store\DefaultStore.cs" />
+    <Compile Include="Store\ImageStore.cs" />
+    <Compile Include="Store\InspectStore.cs" />
+    <Compile Include="Service\IOService.cs" />
+    <Compile Include="Store\IOStore.cs" />
+    <Compile Include="Store\PageStore.cs" />
+    <Compile Include="Store\Process\CommomProcessStore.cs" />
+    <Compile Include="Store\ResultStore.cs" />
+    <Compile Include="Store\MouseStore.cs" />
+    <Compile Include="Store\RecipeStore.cs" />
+    <Compile Include="Store\Process\ManualProcessStore.cs" />
+    <Compile Include="Store\StateStore.cs" />
+    <Compile Include="Store\TeachingStore.cs" />
+    <Compile Include="Store\WindowStore.cs" />
+    <Compile Include="UI\Controls\ViewModels\CameraViewModel.cs" />
+    <Compile Include="UI\Controls\ViewModels\ControlViewModel.cs" />
+    <Compile Include="UI\Controls\ViewModels\WindowViewModel.cs" />
+    <Compile Include="UI\Controls\Views\CameraView.xaml.cs">
+      <DependentUpon>CameraView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ViewModels\ResultViewModel.cs" />
+    <Compile Include="UI\Controls\Views\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Views\NumericButton.xaml.cs">
+      <DependentUpon>NumericButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Views\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Views\WaitDialogView.xaml.cs">
+      <DependentUpon>WaitDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Views\WindowView.xaml.cs">
+      <DependentUpon>WindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Main\ViewModels\AutoModeViewModel.cs" />
+    <Compile Include="UI\Main\ViewModels\MainViewModel.cs" />
+    <Compile Include="UI\Main\ViewModels\TeachModeViewModel.cs" />
+    <Compile Include="UI\Main\Views\AutoModeView.xaml.cs">
+      <DependentUpon>AutoModeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Main\Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Main\Views\TeachModeView.xaml.cs">
+      <DependentUpon>TeachModeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Recipe\ViewModels\RecipeViewModel.cs" />
+    <Compile Include="UI\Recipe\Views\RecipeView.xaml.cs">
+      <DependentUpon>RecipeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Setting\ViewModels\CameraViewModel.cs" />
+    <Compile Include="UI\Setting\ViewModels\CommonViewModel.cs" />
+    <Compile Include="UI\Setting\ViewModels\DefaultViewModel.cs" />
+    <Compile Include="UI\Setting\ViewModels\IOViewModel.cs" />
+    <Compile Include="UI\Setting\ViewModels\SettingViewModel.cs" />
+    <Compile Include="UI\Setting\Views\CameraView.xaml.cs">
+      <DependentUpon>CameraView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Setting\Views\DefaultView.xaml.cs">
+      <DependentUpon>DefaultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Setting\Views\CommonView.xaml.cs">
+      <DependentUpon>CommonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Setting\Views\IOView.xaml.cs">
+      <DependentUpon>IOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Setting\Views\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\ViewModels\ProcessViewModel.cs" />
+    <Compile Include="UI\Shell\ViewModels\ShellViewModel.cs" />
+    <Compile Include="UI\Shell\ViewModels\StatusViewModel.cs" />
+    <Compile Include="UI\Shell\Views\ProcessView.xaml.cs">
+      <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\Views\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Model\Algorithm\Controls\Views\ProfileResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\BinaryCountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\ProfileAdditionalView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\PatternMatchingAdditionalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\BinaryCountResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\PatternMatchingResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\ProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Model\Algorithm\Controls\Views\PatternMatchingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Views\CameraView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Views\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Views\NumericButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Views\ResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Views\WaitDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Views\WindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Main\Views\AutoModeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Main\Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Main\Views\TeachModeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Recipe\Views\RecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Setting\Views\CameraView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Setting\Views\DefaultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Setting\Views\CommonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Setting\Views\IOView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Setting\Views\SettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shell\Views\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Shell\Views\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.ko-KR.Designer.cs">
+      <DependentUpon>Resources.ko-KR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UI\Shell\Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UI\Shell\Views\StatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ko-KR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\OpenCvSharp4.runtime.win.4.5.2.20210404\build\net\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp4.runtime.win.4.5.2.20210404\build\net\OpenCvSharp4.runtime.win.props'))" />
+  </Target>
+</Project>

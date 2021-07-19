@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Shell.Views.StatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Shell.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BVConverter"/>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource Fixed}">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="2"/>
+            </Style>
+            <Style TargetType="ToggleButton" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource DataGridForeground}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{StaticResource Accent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Border BorderThickness="1" BorderBrush="{StaticResource SeparatorBackground}">
+            <UniformGrid Rows="1">
+                <TextBlock Text="{loc:Loc Input}" Background="Transparent"/>
+                <ToggleButton IsChecked="{Binding IOService.InOpen}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Closed}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InEjected}" Visibility="{Binding IOStore.UseEjectEnd, Converter={StaticResource BVConverter}}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Ejected}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InOK}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc OK}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InNG}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc NG}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InSet}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Set}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InRestart}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Restart}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.InDoor}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Door}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <TextBlock Text="{loc:Loc Output}" Background="Transparent"/>
+                <ToggleButton IsChecked="{Binding IOService.OutClose}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Close}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.OutEject}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Eject}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.OutRobot}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Robot}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.OutReEject}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Re-Eject}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.OutAlram}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc Alarm}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding IOService.OutCS}">
+                    <ToggleButton.Content>
+                        <TextBlock Text="{loc:Loc C/S}"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </UniformGrid>
+        </Border>
+        <Border Background="Transparent" Visibility="{Binding IsReleaseMode, Converter={StaticResource BVConverter}}"/>
+    </Grid>
+</UserControl>

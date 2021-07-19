@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Mold_Inspector.UI.Main.Views.AutoModeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mold_Inspector.UI.Main.Views"
+             xmlns:loc="http://wpflocalizeextension.codeplex.com"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:controls="clr-namespace:Mold_Inspector.UI.Controls.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BVConverter"/>
+        </Grid.Resources>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Text="{loc:Loc State}" Style="{StaticResource Title}"/>
+                <Border Grid.Row="1" Margin="0 4" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource SeparatorBackground}"/>
+                <UniformGrid Columns="2">
+                    <UniformGrid.Resources>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource Title}">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <TextBlock Text="{loc:Loc Production}"/>
+                    <TextBlock Text="{loc:Loc {Binding InspectStore.Production}}"/>
+                    <TextBlock Text="{loc:Loc Mold}"/>
+                    <TextBlock Text="{loc:Loc {Binding InspectStore.Mold}}"/>
+                </UniformGrid>
+                <Border BorderThickness="1" BorderBrush="{DynamicResource SeparatorBackground}" Margin="0 8">
+                    <StackPanel Margin="8">
+                        <Grid>
+                            <TextBlock Text="{loc:Loc Status}" Style="{StaticResource Title}"/>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                <ToggleButton IsChecked="{Binding IsEditable}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE15E;" FontSize="12" Margin="0 0 4 0"/>
+                                        <TextBlock Text="{loc:Loc Edit}" Style="{StaticResource Small}"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <Button>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE895;" FontSize="12" Margin="0 0 4 0"/>
+                                        <TextBlock Text="{loc:Loc Refresh}" Style="{StaticResource Small}"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <Border Grid.Row="1" Margin="0 4" BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource SeparatorBackground}"/>
+                        <UniformGrid Columns="2">
+                            <UniformGrid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </UniformGrid.Resources>
+                            <TextBlock Text="{loc:Loc Target}"/>
+                            <Grid>
+                                <TextBlock Text="{Binding InspectStore.Target}"/>
+                                <controls:NumericButton Value="{Binding InspectStore.Target}" Visibility="{Binding IsEditable, Converter={StaticResource BVConverter}}"/>
+                            </Grid>
+                            <TextBlock Text="{loc:Loc Complate}"/>
+                            <TextBlock Text="{Binding InspectStore.Complate}"/>
+                            <TextBlock Text="{loc:Loc NG}"/>
+                            <TextBlock Text="{Binding InspectStore.NG}"/>
+                            <TextBlock Text="{loc:Loc OK}"/>
+                            <TextBlock Text="{Binding InspectStore.OK}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
