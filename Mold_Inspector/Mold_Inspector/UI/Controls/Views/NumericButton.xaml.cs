@@ -31,7 +31,7 @@ namespace Mold_Inspector.UI.Controls.Views
         public decimal Value
         {
             get => (decimal)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
+            set => SetValue(ValueProperty, Math.Round(value, 2));
         }
 
         public DelegateCommand UpCommand { get; }
@@ -60,6 +60,18 @@ namespace Mold_Inspector.UI.Controls.Views
 
             if (decimal.TryParse(textBox.Text, out decimal value))
                 Value = value;
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox == null)
+                return;
+
+            if (e.Key == Key.Enter)
+            {
+                textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Mold_Inspector.Config
 
     class CommonConfig : JsonConfig<CommonConfig>
     {
+        public uint DefaultTarget { get; set; }
         public int Cols { get; set; }
         public int Rows { get; set; }
         public Stretch Stretch { get; set; }
@@ -25,6 +26,8 @@ namespace Mold_Inspector.Config
 
         public CommonConfig()
         {
+            DefaultTarget = 1000;
+
             Stretch = Stretch.Uniform;
             Cols = 1;
             Rows = 1;

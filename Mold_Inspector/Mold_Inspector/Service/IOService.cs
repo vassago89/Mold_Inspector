@@ -353,8 +353,16 @@ namespace Mold_Inspector.Service
             foreach (var camera in _cameraStore.Cameras)
                 _mediator.Connect(camera.ID, camera.Info);
 
-            foreach (var info in _cameraStore.CameraInfos)
-                grabInfos.Add(await _mediator.Grab(info));
+            foreach (var camera in _cameraStore.Cameras)
+            {
+                if (_recipeStore.Selected.ExposureDictionary.ContainsKey(camera.ID))
+                    _mediator.SetExposure(camera.Info, _recipeStore.Selected.ExposureDictionary[camera.ID]);
+
+                if (_recipeStore.Selected.GainDictionary.ContainsKey(camera.ID))
+                    _mediator.SetGain(camera.Info, _recipeStore.Selected.GainDictionary[camera.ID]);
+
+                grabInfos.Add(await _mediator.Grab(camera.Info));
+            }
 
             return grabInfos.All(info => info != null);
         }

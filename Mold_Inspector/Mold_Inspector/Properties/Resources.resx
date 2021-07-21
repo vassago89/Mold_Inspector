@@ -213,6 +213,18 @@
   <data name="en-US" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>Exposure</value>
+  </data>
+  <data name="ExposureMS" xml:space="preserve">
+    <value>Exposure (ms)</value>
+  </data>
+  <data name="Gain" xml:space="preserve">
+    <value>Gain</value>
+  </data>
+  <data name="GainX" xml:space="preserve">
+    <value>Gain (x#)</value>
+  </data>
   <data name="Grab" xml:space="preserve">
     <value>Grab</value>
   </data>

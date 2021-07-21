@@ -141,6 +141,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="uEyeDotNet">
+      <HintPath>..\ThirdParty\uEyeDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
     </Reference>
@@ -182,6 +185,8 @@
     <Compile Include="Device\Camera\Baslers\BaslerCamera.cs" />
     <Compile Include="Device\Camera\Hiks\HikCamera.cs" />
     <Compile Include="Device\Camera\ICamera.cs" />
+    <Compile Include="Device\Camera\iDS\iDSCamera.cs" />
+    <Compile Include="Device\Camera\iDS\iDSCameraFactory.cs" />
     <Compile Include="Device\Camera\ParameterInfo.cs" />
     <Compile Include="Device\CameraService.cs" />
     <Compile Include="Device\IO\IOController.cs" />

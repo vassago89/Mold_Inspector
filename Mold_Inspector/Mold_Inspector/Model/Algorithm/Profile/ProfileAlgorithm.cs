@@ -86,6 +86,7 @@ namespace Mold_Inspector.Model.Algorithm.Profile
 
         public AlgorithmType AlgorithmType => AlgorithmType.Profile;
 
+        [field: NonSerialized]
         public Action ParameterChanged { get; set; }
 
         public ProfileAlgorithm()

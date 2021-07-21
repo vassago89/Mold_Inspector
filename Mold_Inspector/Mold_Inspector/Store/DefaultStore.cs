@@ -14,12 +14,18 @@ namespace Mold_Inspector.Store
 {
     class DefaultStore : ConfigStore<DefaultConfig>
     {
+        public double Exposure { get; set; }
+        public double Gain { get; set;}
+
         public PatternMatchingAlgorithm Pattern { get; set; }
         public BinaryCountAlgorithm Binary { get; set; }
         public ProfileAlgorithm Profile { get; set; }
 
         protected override void CopyFrom(DefaultConfig config)
         {
+            Exposure = config.Exposure;
+            Gain = config.Gain;
+
             Pattern =  config.Pattern;
             Binary = config.Binary;
             Profile = config.Profile;
@@ -27,6 +33,9 @@ namespace Mold_Inspector.Store
 
         protected override void CopyTo(DefaultConfig config)
         {
+            config.Exposure = Exposure;
+            config.Gain = Gain;
+
             config.Pattern = Pattern;
             config.Binary = Binary;
             config.Profile = Profile;

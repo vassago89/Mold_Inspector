@@ -61,9 +61,6 @@ namespace Mold_Inspector.Store
         public void RemoveRecipe(Recipe recipe) => Recipes.Remove(recipe);
         public void SelectRecipe(Recipe recipe)
         {
-            if (recipe != null)
-                recipe.PostProcess();
-            
             Selected = recipe;
             Selected.LastUsedDate = DateTime.Now;
             Save();
@@ -110,7 +107,6 @@ namespace Mold_Inspector.Store
                 windowStore.SetSelected(null);
                 return false;
             }
-
 
             foreach (var window in windowStore.SelectedWindows)
             {

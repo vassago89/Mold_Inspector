@@ -16,7 +16,7 @@
           MouseWheel="MouseWheelHandle"
           MouseMove="MouseMoveHandle"
           MouseLeave="MouseLeaveHandle">
-        <Menu HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="4">
+        <Menu HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="4" Visibility="{Binding StateStore.IsTeachMode, Converter={StaticResource BooleanToVisibilityConverter}}">
             <MenuItem Command="{Binding ZoomInCommand}">
                 <MenuItem.Header>
                     <StackPanel Margin="2">

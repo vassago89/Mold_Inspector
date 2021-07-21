@@ -213,6 +213,18 @@
   <data name="en-US" xml:space="preserve">
     <value>영어</value>
   </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>노출값</value>
+  </data>
+  <data name="ExposureMS" xml:space="preserve">
+    <value>노출 (ms)</value>
+  </data>
+  <data name="Gain" xml:space="preserve">
+    <value>증폭</value>
+  </data>
+  <data name="GainX" xml:space="preserve">
+    <value>증폭 (x#)</value>
+  </data>
   <data name="Grab" xml:space="preserve">
     <value>촬상</value>
   </data>
@@ -383,9 +395,6 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>현황</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value> </value>
   </data>
   <data name="Target" xml:space="preserve">
     <value>목표</value>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mold_Inspector.Store
 {
-    public class TeachingStore : BindableBase
+    class TeachingStore : BindableBase
     {
         public Action ModeChanged { get; set; }
         public Action WindowChanged { get; set; }
@@ -71,6 +71,20 @@ namespace Mold_Inspector.Store
                 SetProperty(ref _window, value);
                 WindowChanged?.Invoke();
             }
+        }
+
+        private ParameterInfoWrapper _exposure;
+        public ParameterInfoWrapper Exposure
+        {
+            get => _exposure;
+            set => SetProperty(ref _exposure, value);
+        }
+
+        private ParameterInfoWrapper _gain;
+        public ParameterInfoWrapper Gain
+        {
+            get => _gain;
+            set => SetProperty(ref _gain, value);
         }
 
         public TeachingStore()

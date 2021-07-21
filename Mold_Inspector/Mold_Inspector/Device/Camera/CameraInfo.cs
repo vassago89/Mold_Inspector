@@ -15,7 +15,7 @@ namespace Mold_Inspector.Device.Camera
 
     public enum ECameraManufacturer
     {
-        Hik, Basler
+        Hik, Basler, iDS
     }
 
     public class CameraInfo : IEquatable<CameraInfo> 

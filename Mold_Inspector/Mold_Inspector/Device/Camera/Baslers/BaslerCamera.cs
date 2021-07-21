@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Basler.Pylon;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace Mold_Inspector.Device.Camera.Baslers
 {
@@ -29,9 +30,11 @@ namespace Mold_Inspector.Device.Camera.Baslers
             _camera.StreamGrabber.ImageGrabbed += StreamGrabber_ImageGrabbed;
 
             _camera.Open();
-
+            
             _converter = new Basler.Pylon.PixelDataConverter();
             _converter.OutputPixelFormat = Basler.Pylon.PixelType.RGB8packed;
+
+            _camera.Parameters[PLCamera.GevHeartbeatTimeout].SetValue(1000);
         }
 
         public bool IsConnected()
@@ -92,24 +95,24 @@ namespace Mold_Inspector.Device.Camera.Baslers
                     _camera.Parameters[PLCamera.OffsetY].GetMaximum());
 
             dictionary[ECameraParameter.Exposure] = new CameraParameter(
-                    _camera.Parameters[PLCamera.ExposureTime].GetValue(),
-                    _camera.Parameters[PLCamera.ExposureTime].GetMinimum(),
-                    _camera.Parameters[PLCamera.ExposureTime].GetMaximum());
+                    _camera.Parameters[PLCamera.ExposureTimeRaw].GetValue() / 1000.0,
+                    _camera.Parameters[PLCamera.ExposureTimeRaw].GetMinimum() / 1000.0,
+                    _camera.Parameters[PLCamera.ExposureTimeRaw].GetMaximum() / 1000.0);
 
             dictionary[ECameraParameter.Gain] = new CameraParameter(
-                    _camera.Parameters[PLCamera.Gain].GetValue(),
-                    _camera.Parameters[PLCamera.Gain].GetMinimum(),
-                    _camera.Parameters[PLCamera.Gain].GetMaximum());
+                    _camera.Parameters[PLCamera.GainRaw].GetValue(),
+                    _camera.Parameters[PLCamera.GainRaw].GetMinimum(),
+                    _camera.Parameters[PLCamera.GainRaw].GetMaximum());
 
             dictionary[ECameraParameter.FrameRate] = new CameraParameter(
-                    _camera.Parameters[PLCamera.AcquisitionFrameRate].GetValue(),
-                    _camera.Parameters[PLCamera.AcquisitionFrameRate].GetMinimum(),
-                    _camera.Parameters[PLCamera.AcquisitionFrameRate].GetMaximum());
+                    _camera.Parameters[PLCamera.AcquisitionFrameRateAbs].GetValue(),
+                    _camera.Parameters[PLCamera.AcquisitionFrameRateAbs].GetMinimum(),
+                    _camera.Parameters[PLCamera.AcquisitionFrameRateAbs].GetMaximum());
 
             dictionary[ECameraParameter.TriggerDelay] = new CameraParameter(
-                    _camera.Parameters[PLCamera.TriggerDelay].GetValue(),
-                    _camera.Parameters[PLCamera.TriggerDelay].GetMinimum(),
-                    _camera.Parameters[PLCamera.TriggerDelay].GetMaximum());
+                    _camera.Parameters[PLCamera.TriggerDelayAbs].GetValue(),
+                    _camera.Parameters[PLCamera.TriggerDelayAbs].GetMinimum(),
+                    _camera.Parameters[PLCamera.TriggerDelayAbs].GetMaximum());
 
             return dictionary;
         }
@@ -195,24 +198,31 @@ namespace Mold_Inspector.Device.Camera.Baslers
 
         public bool SetParameter(ECameraParameter parameter, double value)
         {
-            switch (parameter)
+            try
             {
-                case ECameraParameter.OffsetX:
-                    return _camera.Parameters[PLCamera.OffsetX].TrySetValue((long)Math.Round(value));
-                case ECameraParameter.OffsetY:
-                    return _camera.Parameters[PLCamera.OffsetY].TrySetValue((long)Math.Round(value));
-                case ECameraParameter.Width:
-                    return _camera.Parameters[PLCamera.Width].TrySetValue((long)Math.Round(value));
-                case ECameraParameter.Height:
-                    return _camera.Parameters[PLCamera.Height].TrySetValue((long)Math.Round(value));
-                case ECameraParameter.Exposure:
-                    return _camera.Parameters[PLCamera.ExposureTime].TrySetValue(value);
-                case ECameraParameter.Gain:
-                    return _camera.Parameters[PLCamera.Gain].TrySetValue(value);
-                case ECameraParameter.FrameRate:
-                    return _camera.Parameters[PLCamera.AcquisitionFrameRate].TrySetValue(value);
-                case ECameraParameter.TriggerDelay:
-                    return _camera.Parameters[PLCamera.TriggerDelay].TrySetValue(value);
+                switch (parameter)
+                {
+                    case ECameraParameter.OffsetX:
+                        return _camera.Parameters[PLCamera.OffsetX].TrySetValue((long)Math.Round(value));
+                    case ECameraParameter.OffsetY:
+                        return _camera.Parameters[PLCamera.OffsetY].TrySetValue((long)Math.Round(value));
+                    case ECameraParameter.Width:
+                        return _camera.Parameters[PLCamera.Width].TrySetValue((long)Math.Round(value));
+                    case ECameraParameter.Height:
+                        return _camera.Parameters[PLCamera.Height].TrySetValue((long)Math.Round(value));
+                    case ECameraParameter.Exposure:
+                        return _camera.Parameters[PLCamera.ExposureTimeRaw].TrySetValue((int)(value * 1000.0));
+                    case ECameraParameter.Gain:
+                        return _camera.Parameters[PLCamera.GainRaw].TrySetValue((int)value);
+                    case ECameraParameter.FrameRate:
+                        return _camera.Parameters[PLCamera.AcquisitionFrameRateAbs].TrySetValue(value);
+                    case ECameraParameter.TriggerDelay:
+                        return _camera.Parameters[PLCamera.TriggerDelay].TrySetValue(value);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
 
             return false;
@@ -263,12 +273,14 @@ namespace Mold_Inspector.Device.Camera.Baslers
 
         private void StreamGrabber_ImageGrabbed(object sender, Basler.Pylon.ImageGrabbedEventArgs e)
         {
-
             if (_grabCount > 0)
             {
                 _count++;
 
                 if (_count > _grabCount)
+                    return;
+
+                if (_count >= _grabCount)
                 {
                     Stop();
                     if (GrabDone != null)

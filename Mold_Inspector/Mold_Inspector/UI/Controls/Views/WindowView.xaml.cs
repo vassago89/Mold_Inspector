@@ -115,7 +115,7 @@ namespace Mold_Inspector.UI.Controls.Views
                     viewModel.WindowStore = e.NewValue as WindowStore;
                 }));
 
-        public WindowStore WindowStore
+        internal WindowStore WindowStore
         {
             get => (WindowStore)GetValue(WindowStoreProperty);
             set => SetValue(WindowStoreProperty, value);

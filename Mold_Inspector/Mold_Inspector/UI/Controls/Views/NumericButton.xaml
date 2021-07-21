@@ -20,6 +20,7 @@
             <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
             <Setter Property="Foreground" Value="{DynamicResource DataGridCellForeground}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource SeparatorBackground}"/>
+            <Setter Property="TextAlignment" Value="Center"/>
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Opacity" Value="0.5"/>
@@ -33,16 +34,17 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBox Text="{Binding Value, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}" VerticalContentAlignment="Center"
-                 TextChanged="TextBox_TextChanged"/>
+                 TextChanged="TextBox_TextChanged"
+                 KeyDown="TextBox_KeyDown"/>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Command="{Binding UpCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}">
+            <Button Command="{Binding UpCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}" Focusable="False">
                 <TextBlock TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE96D;" FontSize="6"/>
             </Button>
-            <Button Grid.Row="1" Command="{Binding DownCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}">
+            <Button Grid.Row="1" Command="{Binding DownCommand, RelativeSource={RelativeSource AncestorType=local:NumericButton, Mode=FindAncestor}}" Focusable="False">
                 <TextBlock TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE96E;" FontSize="6"/>
             </Button>
         </Grid>

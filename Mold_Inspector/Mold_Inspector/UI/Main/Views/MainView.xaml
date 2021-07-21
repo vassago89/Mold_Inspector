@@ -62,14 +62,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            <Grid>
+            <Grid IsEnabled="{Binding StateStore.IsTeachMode}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding StateStore.IsTeachMode}">
-                    <StackPanel Orientation="Horizontal" Margin="4 4 4 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel IsEnabled="{Binding OnLive, Converter={StaticResource Inverter}}" Orientation="Horizontal" Margin="4 4 0 0">
                         <TextBlock Text="{loc:Loc Control}" Style="{StaticResource Emphasis}" VerticalAlignment="Center"/>
                         <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
                         <Button Command="{Binding InspectCommand}">
@@ -90,14 +90,14 @@
                                 <TextBlock Text="{loc:Loc Grab}"/>
                             </StackPanel>
                         </Button>
-                        <Button Command="{Binding LiveCommand}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE20A;" FontSize="16" Margin="0 0 4 0"/>
-                                <TextBlock Text="{loc:Loc Live}"/>
-                            </StackPanel>
-                        </Button>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="4 4 4 0">
+                    <ToggleButton IsChecked="{Binding OnLive}" Margin="2 6 4 2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE20A;" FontSize="16" Margin="0 0 4 0"/>
+                            <TextBlock Text="{loc:Loc Live}"/>
+                        </StackPanel>
+                    </ToggleButton>
+                    <StackPanel IsEnabled="{Binding OnLive, Converter={StaticResource Inverter}}" Orientation="Horizontal" Margin="4 4 4 0">
                         <TextBlock Text="{loc:Loc Mode}" Style="{StaticResource Emphasis}" VerticalAlignment="Center"/>
                         <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
                         <RadioButton IsChecked="{Binding TeachingStore.IsProductionMode}" Command="{Binding ProductionCommand}">
@@ -115,7 +115,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4 4 4 0"/>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding StateStore.IsTeachMode}">
+                <StackPanel  IsEnabled="{Binding OnLive, Converter={StaticResource Inverter}}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal" Margin="4 4 4 0" IsEnabled="{Binding TeachingStore.IsLock, Converter={StaticResource Inverter}}">
                         <TextBlock Text="{loc:Loc Window}" VerticalAlignment="Center" Style="{StaticResource Emphasis}"/>
                         <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>
@@ -166,7 +166,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Border Background="Gray" BorderThickness="1" Margin="4" BorderBrush="{DynamicResource DataGridCellForeground}">
+                                <Border Background="Gray" BorderThickness="1" Margin="1" BorderBrush="{DynamicResource DataGridCellForeground}">
                                     <controls:CameraView ID="{Binding DataContext.ID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"/>
                                 </Border>
                             </Grid>

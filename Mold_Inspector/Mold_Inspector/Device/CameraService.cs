@@ -12,6 +12,7 @@ namespace Mold_Inspector.Device
     {
         private static ICameraFactory _baslerFactory = CameraFactory.Instance.Create(ECameraManufacturer.Basler);
         private static ICameraFactory _hikFactory = CameraFactory.Instance.Create(ECameraManufacturer.Hik);
+        private static ICameraFactory _idsFactory = CameraFactory.Instance.Create(ECameraManufacturer.iDS);
 
         private bool _grabbing;
         private GrabInfo _grabInfo;
@@ -41,6 +42,16 @@ namespace Mold_Inspector.Device
             try
             {
                 Infos.AddRange(_hikFactory.GetDevices());
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            // MVS SDK 필요
+            try
+            {
+                Infos.AddRange(_idsFactory.GetDevices());
             }
             catch (Exception e)
             {
@@ -184,6 +195,11 @@ namespace Mold_Inspector.Device
                     if (_hikFactory.IsExist(info) == false)
                         return false;
                     _camera = _hikFactory.Connect(info);
+                    break;
+                case ECameraManufacturer.iDS:
+                    if (_idsFactory.IsExist(info) == false)
+                        return false;
+                    _camera = _idsFactory.Connect(info);
                     break;
             }
 

@@ -1,4 +1,6 @@
-﻿using Mold_Inspector.Model.Algorithm;
+﻿using Mold_Inspector.Device;
+using Mold_Inspector.Device.Camera;
+using Mold_Inspector.Model.Algorithm;
 using Mold_Inspector.Model.Selection;
 using Mold_Inspector.Service;
 using Mold_Inspector.Store;
@@ -46,16 +48,29 @@ namespace Mold_Inspector.UI.Controls.ViewModels
             set => SetProperty(ref _windowStore, value);
         }
 
+        public StateStore StateStore { get; }
+
+        private CameraStore _cameraStore;
+        private CameraServiceMediator _mediator;
+
         public ControlViewModel(
             TeachingStore teachingStore,
             MouseStore mouseStore,
             RecipeStore recipeStore,
+            CameraStore cameraStore,
+            StateStore stateStore,
+            CameraServiceMediator mediator,
             DefaultStore defaultStore)
         {
+            StateStore = stateStore;
+
             _teachingStore = teachingStore;
             _mouseStore = mouseStore;
             _recipeStore = recipeStore;
             _defaultStore = defaultStore;
+
+            _cameraStore = cameraStore;
+            _mediator = mediator;
 
             ZoomInCommand = new DelegateCommand(() =>
             {
@@ -105,7 +120,7 @@ namespace Mold_Inspector.UI.Controls.ViewModels
                 case MouseAction.LeftClick:
                     _mouseStore.Mouse = MouseState.Left;
                     _mouseStore.SelectDirection = SelectDirection.None;
-                    _teachingStore.Window = null;
+                    SelectWindow(null);
                     if (_mouseStore.Command == CommandState.Create)
                         return;
 
@@ -124,7 +139,7 @@ namespace Mold_Inspector.UI.Controls.ViewModels
                             if (direction != SelectDirection.None)
                             {   
                                 _mouseStore.SelectDirection = direction;
-                                _teachingStore.Window = window;
+                                SelectWindow(window);
                                 _windowStore.SetSelected(window);
                                 break;
                             }
@@ -235,7 +250,7 @@ namespace Mold_Inspector.UI.Controls.ViewModels
                         if (windows.Count() == 1)
                         {
                             _windowStore.SetSelected(windows.First());
-                            _teachingStore.Window = windows.First();
+                            SelectWindow(windows.First());
                         }
                         else
                         {
@@ -249,8 +264,8 @@ namespace Mold_Inspector.UI.Controls.ViewModels
                         if (_teachingStore.Window != null)
                         {
                             var temp = _teachingStore.Window;
-                            _teachingStore.Window = null;
-                            _teachingStore.Window = temp;
+                            SelectWindow(null);
+                            SelectWindow(temp);
                             _teachingStore.Window.Algorithm.ParameterChanged?.Invoke();
                         }
                         break;
@@ -273,6 +288,23 @@ namespace Mold_Inspector.UI.Controls.ViewModels
             _windowStore.SetRegion(System.Drawing.Rectangle.Empty);
             _mouseStore.Mouse = MouseState.None;
             _mouseStore.Command = CommandState.None;
+        }
+
+        private void SelectWindow(Model.Window selected)
+        {
+            _teachingStore.Window = selected;
+
+            if (selected != null && _cameraStore.Cameras.Any(c => c.ID == selected.CameraID))
+            {   
+                var wrapper = _cameraStore.Cameras.First(c => c.ID == selected.CameraID);
+
+                _teachingStore.Exposure = new ParameterInfoWrapper(_recipeStore.Selected, ECameraParameter.Exposure, _mediator, wrapper);
+                _teachingStore.Gain = new ParameterInfoWrapper(_recipeStore.Selected, ECameraParameter.Gain, _mediator, wrapper);
+                return;
+            }
+
+            _teachingStore.Exposure = null;
+            _teachingStore.Gain = null;
         }
     }
 }

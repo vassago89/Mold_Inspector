@@ -56,13 +56,18 @@ namespace Mold_Inspector.Store
             set => SetProperty(ref _ng, value);
         }
 
-        public InspectStore()
+        CommonStore _commonStore;
+
+        public InspectStore(CommonStore commonStore)
         {
-            
+            _commonStore = commonStore;
+
+            Reset();
         }
 
         public void Reset()
         {
+            Target = _commonStore.DefaultTarget;
             Complate = 0;
             OK = 0;
             NG = 0;

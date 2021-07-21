@@ -45,6 +45,9 @@ namespace Mold_Inspector.Model.Algorithm.PatternMatching
 
         public void PostProcess()
         {
+            if (Source != null)
+                return;
+
             switch (Channels)
             {
                 case 1:

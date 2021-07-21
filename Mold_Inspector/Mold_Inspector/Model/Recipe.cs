@@ -1,4 +1,5 @@
 ﻿using Mold_Inspector.Service;
+using Mold_Inspector.Store;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,9 @@ namespace Mold_Inspector.Model
         public Dictionary<int, (int WIdth, int Height)> SizeDictionary { get; }
         public Dictionary<InspectMode, Dictionary<int, ObservableCollection<Window>>> Windows { get; }
 
+        public Dictionary<int, double> ExposureDictionary { get; }
+        public Dictionary<int, double> GainDictionary { get; }
+
         public Recipe(string name)
         {
             Name = name;
@@ -29,6 +33,9 @@ namespace Mold_Inspector.Model
             Windows = new Dictionary<InspectMode, Dictionary<int, ObservableCollection<Window>>>();
             foreach (var mode in Enum.GetValues(typeof(InspectMode)).Cast<InspectMode>())
                 Windows[mode] = new Dictionary<int, ObservableCollection<Window>>();
+
+            ExposureDictionary = new Dictionary<int, double>();
+            GainDictionary = new Dictionary<int, double>();
 
             RegistrationDate = DateTime.Now;
             LastUsedDate = DateTime.Now;
@@ -55,8 +62,17 @@ namespace Mold_Inspector.Model
             Windows[inspectMode][id] = windows;
         }
 
-        public void PostProcess()
+        public void PostProcess(CameraStore cameraStore, DefaultStore defaultStore)
         {
+            foreach (var camera in cameraStore.Cameras)
+            {
+                if (ExposureDictionary.ContainsKey(camera.ID) == false)
+                    ExposureDictionary[camera.ID] = defaultStore.Exposure;
+
+                if (GainDictionary.ContainsKey(camera.ID) == false)
+                    GainDictionary[camera.ID] = defaultStore.Gain;
+            }
+
             foreach (var mode in Enum.GetValues(typeof(InspectMode)).Cast<InspectMode>())
             {
                 foreach(var windows in Windows[mode].Values)
@@ -66,6 +82,11 @@ namespace Mold_Inspector.Model
                         window.PostProcess();
                 }
             }
+        }
+
+        public void Save()
+        {
+
         }
     }
 }

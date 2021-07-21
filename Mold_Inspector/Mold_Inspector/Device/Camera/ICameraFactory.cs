@@ -1,5 +1,6 @@
 ﻿using Mold_Inspector.Device.Camera.Baslers;
 using Mold_Inspector.Device.Camera.Hiks;
+using Mold_Inspector.Device.Camera.iDS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace Mold_Inspector.Device.Camera
                     return new HikCameraFactory();
                 case ECameraManufacturer.Basler:
                     return new BaslerCameraFactory();
+                case ECameraManufacturer.iDS:
+                    return new iDSCameraFactory();
             }
 
             return null;

@@ -349,6 +349,42 @@ namespace Mold_Inspector.Properties {
         }
         
         /// <summary>
+        ///   Exposure과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Exposure {
+            get {
+                return ResourceManager.GetString("Exposure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Exposure (ms)과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ExposureMS {
+            get {
+                return ResourceManager.GetString("ExposureMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Gain과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Gain {
+            get {
+                return ResourceManager.GetString("Gain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Gain (x#)과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string GainX {
+            get {
+                return ResourceManager.GetString("GainX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Grab과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Grab {

@@ -87,6 +87,38 @@ namespace Mold_Inspector.Device
             _serviceDictionary.Clear();
         }
 
+        public bool SetExposure(CameraInfo info, double value)
+        {
+            return _serviceDictionary[info].SetParameter(ECameraParameter.Exposure, value);
+        }
+
+        public bool SetGain(CameraInfo info, double value)
+        {
+            return _serviceDictionary[info].SetParameter(ECameraParameter.Gain, value);
+        }
+
+        public (double Cur, double Min, double Max) GetExposure(CameraInfo info)
+        {
+            var parameterInfo = _serviceDictionary[info].GetParameterInfo();
+            if (parameterInfo == null)
+                return (0, 0, 0);
+
+            var exposure = parameterInfo.Parameters[ECameraParameter.Exposure];
+
+            return (exposure.Current, exposure.Min, exposure.Max);
+        }
+
+        public (double Cur, double Min, double Max) GetGain(CameraInfo info)
+        {
+            var parameterInfo = _serviceDictionary[info].GetParameterInfo();
+            if (parameterInfo == null)
+                return (0, 0, 0);
+
+            var gain = parameterInfo.Parameters[ECameraParameter.Gain];
+
+            return (gain.Current, gain.Min, gain.Max);
+        }
+
         public async Task<GrabInfo?> Grab(CameraInfo info)
         {
             if (_serviceDictionary.ContainsKey(info) == false)

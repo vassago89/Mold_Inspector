@@ -12,6 +12,13 @@ namespace Mold_Inspector.Store
 {
     class CommonStore : ConfigStore<CommonConfig>
     {
+        private uint _defaultTarget;
+        public uint DefaultTarget
+        {
+            get => _defaultTarget;
+            set => SetProperty(ref _defaultTarget, value);
+        }
+
         private int _cols;
         public int Cols 
         {
@@ -80,6 +87,7 @@ namespace Mold_Inspector.Store
             Theme = config.Theme;
             AccentColor = config.AccentColor;
             AccentName = config.AccentName;
+            DefaultTarget = config.DefaultTarget;
         }
 
         protected override void CopyTo(CommonConfig config)
@@ -91,6 +99,7 @@ namespace Mold_Inspector.Store
             config.Theme = Theme;
             config.AccentColor = AccentColor;
             config.AccentName = AccentName;
+            config.DefaultTarget = DefaultTarget;
         }
     }
 }

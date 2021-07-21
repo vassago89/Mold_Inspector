@@ -13,6 +13,29 @@ namespace Mold_Inspector.UI.Main.ViewModels
 {
     class MainViewModel : BindableBase
     {
+        private bool _onLive;
+        public bool OnLive
+        {
+            get => _onLive;
+            set
+            {
+                SetProperty(ref _onLive, value);
+                if (_onLive)
+                {
+                    foreach (var camera in CameraStore.Cameras)
+                        _cameraServiceMediator.Connect(camera.ID, camera.Info);
+
+                    foreach (var info in CameraStore.CameraInfos)
+                        _cameraServiceMediator.Live(info);
+                }
+                else
+                {
+                    foreach (var info in CameraStore.CameraInfos)
+                        _cameraServiceMediator.Stop(info);
+                }
+            }
+        }
+
         public CameraStore CameraStore { get; }
         public CommonStore CommonStore { get; }
         public StateStore StateStore { get; }
@@ -21,7 +44,6 @@ namespace Mold_Inspector.UI.Main.ViewModels
         public DelegateCommand MoldCommand { get; }
 
         public DelegateCommand GrabCommand { get; }
-        public DelegateCommand LiveCommand { get; }
 
         public DelegateCommand InspectCommand { get; }
 
@@ -76,17 +98,16 @@ namespace Mold_Inspector.UI.Main.ViewModels
                 foreach (var camera in CameraStore.Cameras)
                     _cameraServiceMediator.Connect(camera.ID, camera.Info);
                  
-                foreach (var info in CameraStore.CameraInfos)
-                    await _cameraServiceMediator.Grab(info);
-            });
-
-            LiveCommand = new DelegateCommand(() =>
-            {
                 foreach (var camera in CameraStore.Cameras)
-                    _cameraServiceMediator.Connect(camera.ID, camera.Info);
+                {
+                    if (RecipeStore.Selected.ExposureDictionary.ContainsKey(camera.ID))
+                        _cameraServiceMediator.SetExposure(camera.Info, RecipeStore.Selected.ExposureDictionary[camera.ID]);
 
-                foreach (var info in CameraStore.CameraInfos)
-                    _cameraServiceMediator.Live(info);
+                    if (RecipeStore.Selected.GainDictionary.ContainsKey(camera.ID))
+                        _cameraServiceMediator.SetGain(camera.Info, RecipeStore.Selected.GainDictionary[camera.ID]);
+
+                    await _cameraServiceMediator.Grab(camera.Info);
+                }
             });
 
             InspectCommand = new DelegateCommand(() =>

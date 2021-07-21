@@ -1,4 +1,5 @@
-﻿using Mold_Inspector.Device.Camera;
+﻿using Mold_Inspector.Device;
+using Mold_Inspector.Device.Camera;
 using Mold_Inspector.Model;
 using Mold_Inspector.Model.Algorithm;
 using Mold_Inspector.Model.Selection;
@@ -15,7 +16,7 @@ using System.Windows.Data;
 
 namespace Mold_Inspector.Store
 {
-    public class WindowStoreMediator
+    class WindowStoreMediator
     {
         private static WindowStoreMediator _instance;
 
@@ -67,6 +68,86 @@ namespace Mold_Inspector.Store
         }
     }
 
+    class ParameterInfoWrapper : BindableBase
+    {
+        Recipe _recipe;
+        ECameraParameter _parameter;
+        CameraServiceMediator _mediator;
+        CameraInfoWrapper _wrapper;
+
+        private double _cur;
+        public double Cur
+        {
+            get => _cur;
+            set
+            {
+                SetProperty(ref _cur, value);
+                switch (_parameter)
+                {
+                    case ECameraParameter.Width:
+                    case ECameraParameter.Height:
+                    case ECameraParameter.OffsetX:
+                    case ECameraParameter.OffsetY:
+                    case ECameraParameter.FrameRate:
+                    case ECameraParameter.TriggerDelay:
+                        throw new NotImplementedException();
+                    case ECameraParameter.Exposure:
+                        _mediator.SetExposure(_wrapper.Info, value);
+                        _recipe.ExposureDictionary[_wrapper.ID] = _cur;
+                        break;
+                    case ECameraParameter.Gain:
+                        _mediator.SetGain(_wrapper.Info, value);
+                        _recipe.GainDictionary[_wrapper.ID] = _cur;
+                        break;
+                }
+            }
+        }
+
+        private double _min;
+        public double Min => _min;
+
+        private double _max;
+        public double Max => _max;
+
+        public ParameterInfoWrapper(
+            Recipe recipe,
+            ECameraParameter parameter, 
+            CameraServiceMediator mediator, 
+            CameraInfoWrapper wrapper)
+        {
+            _recipe = recipe;
+            _parameter = parameter;
+            _mediator = mediator;
+            _wrapper = wrapper;
+            _mediator.Connect(_wrapper.ID, _wrapper.Info);
+
+            switch (_parameter)
+            {
+                case ECameraParameter.Width:
+                case ECameraParameter.Height:
+                case ECameraParameter.OffsetX:
+                case ECameraParameter.OffsetY:
+                case ECameraParameter.FrameRate:
+                case ECameraParameter.TriggerDelay:
+                    throw new NotImplementedException();
+                case ECameraParameter.Exposure:
+                    var exposure = mediator.GetExposure(_wrapper.Info);
+                    _cur = exposure.Cur;
+                    _min = exposure.Min;
+                    _max = exposure.Max;
+                    _recipe.ExposureDictionary[_wrapper.ID] = _cur;
+                    break;
+                case ECameraParameter.Gain:
+                    var gain = mediator.GetGain(_wrapper.Info);
+                    _cur = gain.Cur;
+                    _min = gain.Min;
+                    _max = gain.Max;
+                    _recipe.GainDictionary[_wrapper.ID] = _cur;
+                    break;
+            }
+        }
+    }
+
     public class NextWindow : BindableBase
     {
         private Rectangle _region;
@@ -90,7 +171,7 @@ namespace Mold_Inspector.Store
         }
     }
 
-    public class WindowStore : BindableBase
+    class WindowStore : BindableBase
     {
         private Rectangle _region;
         public Rectangle Region
@@ -105,6 +186,7 @@ namespace Mold_Inspector.Store
             get => _selected;
             private set => SetProperty(ref _selected, value);
         }
+
 
         private NextWindow _nextSelected;
         public NextWindow NextSelected
@@ -138,6 +220,7 @@ namespace Mold_Inspector.Store
         }
 
         private int _id;
+
         private RecipeStore _recipeStore;
         private TeachingStore _teachingStore;
         
@@ -309,6 +392,9 @@ namespace Mold_Inspector.Store
         public void SetSelected(Window selected)
         {
             Selected = selected;
+            
+            
+
             WindowStoreMediator.Instacne.Selected(this);
         }
 

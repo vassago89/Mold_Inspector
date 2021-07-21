@@ -47,6 +47,11 @@ namespace Mold_Inspector.Device.Camera.Hiks
             
             _count = 0;
             _grabCount = -1;
+
+
+            //MvCamCtrl.NET.MyCamera.MVCC_INTVALUE heartBeat = new MyCamera.MVCC_INTVALUE();
+            //_device.MV_CC_GetHeartBeatTimeout_NET(ref heartBeat);
+            _device.MV_CC_SetHeartBeatTimeout_NET(1000);
         }
 
         ~HikCamera()
@@ -103,13 +108,16 @@ namespace Mold_Inspector.Device.Camera.Hiks
             if (camera._grabCount > 0)
             {
                 camera._count++;
+                
                 if (camera._count > camera._grabCount)
+                    return;
+
+                if (camera._count >= camera._grabCount)
                 {
                     camera.Stop();
                     if (camera.GrabDone != null)
                         camera.GrabDone();
                 }
-                    
             }
 
             if (camera.ImageGrabbed != null)
@@ -172,7 +180,7 @@ namespace Mold_Inspector.Device.Camera.Hiks
                     nRet = _device.MV_CC_SetHeight_NET((uint)Math.Round(value));
                     break;
                 case ECameraParameter.Exposure:
-                    nRet = _device.MV_CC_SetExposureTime_NET((float)value);
+                    nRet = _device.MV_CC_SetExposureTime_NET((float)(value * 1000.0));
                     break;
                 case ECameraParameter.Gain:
                     nRet = _device.MV_CC_SetGain_NET((float)value);
@@ -311,7 +319,7 @@ namespace Mold_Inspector.Device.Camera.Hiks
             dictionary[ECameraParameter.Height] = new CameraParameter(height.nCurValue, height.nMin, height.nMax);
             dictionary[ECameraParameter.OffsetX] = new CameraParameter(offsetX.nCurValue, offsetX.nMin, offsetX.nMax);
             dictionary[ECameraParameter.OffsetY] = new CameraParameter(offsetY.nCurValue, offsetY.nMin, offsetY.nMax);
-            dictionary[ECameraParameter.Exposure] = new CameraParameter(exposure.fCurValue, exposure.fMin, exposure.fMax);
+            dictionary[ECameraParameter.Exposure] = new CameraParameter(exposure.fCurValue / 1000.0, exposure.fMin / 1000.0, exposure.fMax / 1000.0);
             dictionary[ECameraParameter.Gain] = new CameraParameter(gain.fCurValue, gain.fMin, gain.fMax);
             dictionary[ECameraParameter.FrameRate] = new CameraParameter(frameRate.fCurValue, frameRate.fMin, frameRate.fMax);
             dictionary[ECameraParameter.TriggerDelay] = new CameraParameter(triggerDelay.fCurValue, triggerDelay.fMin, triggerDelay.fMax);

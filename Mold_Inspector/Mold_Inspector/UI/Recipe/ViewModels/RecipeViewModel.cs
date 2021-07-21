@@ -44,6 +44,9 @@ namespace Mold_Inspector.UI.Recipe.ViewModels
         private CameraStore _cameraStore;
 
         private IOService _ioService;
+        private DefaultStore _defaultStore;
+        private InspectStore _inspectStore;
+
 
         public RecipeViewModel(
             IOService ioService,
@@ -53,12 +56,16 @@ namespace Mold_Inspector.UI.Recipe.ViewModels
             TeachingStore teachingStore,
             RecipeStore recipeStore,
             ResultStore resultStore,
-            PageStore pageStore)
+            PageStore pageStore,
+            InspectStore inspectStore,
+            DefaultStore defaultStore)
         {
             _ioService = ioService;
             _stateStore = stateStore;
             _teachingStore = teachingStore;
             _pageStore = pageStore;
+            _defaultStore = defaultStore;
+            _inspectStore = inspectStore;
 
             RecipeStore = recipeStore;
 
@@ -97,8 +104,14 @@ namespace Mold_Inspector.UI.Recipe.ViewModels
 
             _resultStore.Refresh();
 
+            if (_currentRecipe != null)
+                _currentRecipe.PostProcess(_cameraStore, _defaultStore);
+
             RecipeStore.SelectRecipe(_currentRecipe);
 
+            RecipeStore.Save();
+
+            _inspectStore.Reset();
             _stateStore.Initialize();
             _teachingStore.IsLock = false;
             _teachingStore.InspectMode = InspectMode.Production;
