@@ -17,6 +17,8 @@ namespace Mold_Inspector.UI.Setting.ViewModels
         public IEnumerable<Parity> Parities => Enum.GetValues(typeof(Parity)).Cast<Parity>();
         public IEnumerable<StopBits> StopBits => Enum.GetValues(typeof(StopBits)).Cast<StopBits>();
         public IEnumerable<string> Ports => SerialPort.GetPortNames();
+        public IEnumerable<int> BaudRates => new int[] { 9600, 14400, 19200, 28800, 38400, 57600, 115200 };
+        public IEnumerable<int> DataBits => new int[] { 5, 6, 7, 8 };
 
         public DelegateCommand ConnectCommand { get; }
 
@@ -30,15 +32,18 @@ namespace Mold_Inspector.UI.Setting.ViewModels
 
             ConnectCommand = new DelegateCommand(() =>
             {
-                var serialController = ioController as KM6050IOController;
-                serialController.Connect(
+                var controller = ioController as KM6050IOController;
+                if (controller == null)
+                    return;
+
+                controller.Connect(
                     ioStore.PortName,
                     ioStore.BaudRate,
                     ioStore.Parity,
                     ioStore.DataBits,
                     ioStore.StopBits);
 
-                serialController.StartMonitoring(1000);
+                controller.StartMonitoring(1000);
             });
         }
     }

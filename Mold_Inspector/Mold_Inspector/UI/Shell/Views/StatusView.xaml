@@ -35,7 +35,7 @@
                 <TextBlock Text="{loc:Loc Input}" Background="Transparent"/>
                 <ToggleButton IsChecked="{Binding IOService.InOpen}">
                     <ToggleButton.Content>
-                        <TextBlock Text="{loc:Loc Closed}"/>
+                        <TextBlock Text="{loc:Loc Open}"/>
                     </ToggleButton.Content>
                 </ToggleButton>
                 <ToggleButton IsChecked="{Binding IOService.InEjected}" Visibility="{Binding IOStore.UseEjectEnd, Converter={StaticResource BVConverter}}">

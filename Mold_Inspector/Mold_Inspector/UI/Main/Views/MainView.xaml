@@ -68,7 +68,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding StateStore.IsTeachEnable}">
                     <StackPanel IsEnabled="{Binding OnLive, Converter={StaticResource Inverter}}" Orientation="Horizontal" Margin="4 4 0 0">
                         <TextBlock Text="{loc:Loc Control}" Style="{StaticResource Emphasis}" VerticalAlignment="Center"/>
                         <Border BorderThickness="1 0 0 0" BorderBrush="{DynamicResource SeparatorBackground}" Margin="4"/>

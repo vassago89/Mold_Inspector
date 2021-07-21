@@ -49,13 +49,13 @@
                     <Border>
                         <StackPanel>
                             <mui:ModernProgressRing IsActive="{Binding StateStore.IsWaitClosing}" Margin="4"/>
-                            <TextBlock Text="{loc:Loc Closing}"/>
+                            <TextBlock Text="{loc:Loc Close}"/>
                         </StackPanel>
                     </Border>
                     <Border>
                         <StackPanel>
                             <mui:ModernProgressRing IsActive="{Binding StateStore.IsWaitOpen}" Margin="4"/>
-                            <TextBlock Text="{loc:Loc Closed}"/>
+                            <TextBlock Text="{loc:Loc Open}"/>
                         </StackPanel>
                     </Border>
                     <Border Visibility="{Binding IOStore.UseEjectEnd, Converter={StaticResource BVConverter}}">

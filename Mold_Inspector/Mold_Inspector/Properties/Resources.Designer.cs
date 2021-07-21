@@ -97,20 +97,20 @@ namespace Mold_Inspector.Properties {
         }
         
         /// <summary>
-        ///   Alram과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string Alram {
-            get {
-                return ResourceManager.GetString("Alram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Auto과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Auto {
             get {
                 return ResourceManager.GetString("Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Baud Rate과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Baud_Rate {
+            get {
+                return ResourceManager.GetString("Baud Rate", resourceCulture);
             }
         }
         
@@ -255,6 +255,15 @@ namespace Mold_Inspector.Properties {
         internal static string Dark {
             get {
                 return ResourceManager.GetString("Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Data Bits과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Data_Bits {
+            get {
+                return ResourceManager.GetString("Data Bits", resourceCulture);
             }
         }
         
@@ -682,6 +691,15 @@ namespace Mold_Inspector.Properties {
         }
         
         /// <summary>
+        ///   Parity과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Parity {
+            get {
+                return ResourceManager.GetString("Parity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Pattern과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Pattern {
@@ -853,6 +871,15 @@ namespace Mold_Inspector.Properties {
         }
         
         /// <summary>
+        ///   Serial과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Serial {
+            get {
+                return ResourceManager.GetString("Serial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Serial No과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Serial_No {
@@ -894,6 +921,15 @@ namespace Mold_Inspector.Properties {
         internal static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Stop Bits과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Stop_Bits {
+            get {
+                return ResourceManager.GetString("Stop Bits", resourceCulture);
             }
         }
         

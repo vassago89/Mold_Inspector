@@ -21,14 +21,8 @@
         </Grid.Resources>
         <UniformGrid Rows="1" Columns="2" Margin="4">
             <StackPanel>
+                <TextBlock Text="{loc:Loc Eject}" Margin="4"/>
                 <UniformGrid Columns="2">
-                    <TextBlock Text="{loc:Loc Port}"/>
-                    <UniformGrid Rows="1">
-                        <ComboBox BorderBrush="{DynamicResource DataGridForeground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.PortName}" ItemsSource="{Binding Ports}" Margin="0 0 2 0"/>
-                        <Button Command="{Binding ConnectCommand}" BorderBrush="{DynamicResource DataGridCellForeground}" Margin="2 0 0 0">
-                            <TextBlock Text="{loc:Loc Connect}"/>
-                        </Button>
-                    </UniformGrid>
                     <TextBlock Text="{loc:Loc Eject Delay}"/>
                     <controls:NumericButton Value="{Binding IOStore.EjectDelay}"/>
                     <TextBlock Text="{loc:Loc Use Ejected}"/>
@@ -38,8 +32,27 @@
                     <TextBlock Text="{loc:Loc Re-Eject Count}"/>
                     <controls:NumericButton IsEnabled="{Binding IOStore.UseReEject}" Value="{Binding IOStore.ReEjectCount}"/>
                 </UniformGrid>
+                <TextBlock Text="{loc:Loc Serial}" Margin="4"/>
+                <UniformGrid Columns="2">
+                    <TextBlock Text="{loc:Loc Port}"/>
+                    <UniformGrid Rows="1">
+                        <ComboBox BorderBrush="{DynamicResource SeparatorBackground}" Foreground="{DynamicResource DataGridForeground}" VerticalContentAlignment="Center" SelectedItem="{Binding IOStore.PortName}" ItemsSource="{Binding Ports}" Margin="0 0 2 0"/>
+                        <Button Command="{Binding ConnectCommand}" BorderBrush="{DynamicResource DataGridCellForeground}">
+                            <TextBlock Text="{loc:Loc Connect}"/>
+                        </Button>
+                    </UniformGrid>
+                    <TextBlock Text="{loc:Loc Baud Rate}"/>
+                    <ComboBox BorderBrush="{DynamicResource SeparatorBackground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.BaudRate}" ItemsSource="{Binding BaudRates}" Margin="0 0 2 0"/>
+                    <TextBlock Text="{loc:Loc Parity}"/>
+                    <ComboBox BorderBrush="{DynamicResource SeparatorBackground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.Parity}" ItemsSource="{Binding Parities}" Margin="0 0 2 0"/>
+                    <TextBlock Text="{loc:Loc Data Bits}"/>
+                    <ComboBox BorderBrush="{DynamicResource SeparatorBackground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.DataBits}" ItemsSource="{Binding DataBits}" Margin="0 0 2 0"/>
+                    <TextBlock Text="{loc:Loc Stop Bits}"/>
+                    <ComboBox BorderBrush="{DynamicResource SeparatorBackground}" Foreground="{DynamicResource DataGridForeground}" SelectedItem="{Binding IOStore.StopBits}" ItemsSource="{Binding StopBits}" Margin="0 0 2 0"/>
+                </UniformGrid>
             </StackPanel>
             <StackPanel>
+                <TextBlock Text="{loc:Loc Input}" Margin="4"/>
                 <UniformGrid Columns="2">
                     <TextBlock Text="{loc:Loc Open}"/>
                     <controls:NumericButton Value="{Binding IOStore.IOPort.InOpen}"/>
@@ -62,7 +75,9 @@
                     <TextBlock Text="{loc:Loc Door}"/>
                     <controls:NumericButton Value="{Binding IOStore.IOPort.InDoor}"/>
                     <!--<TextBox Text="{Binding IOStore.IOPort.InDoor}"/>-->
-
+                </UniformGrid>
+                <TextBlock Text="{loc:Loc Output}" Margin="4"/>
+                <UniformGrid Columns="2">
                     <TextBlock Text="{loc:Loc Close}"/>
                     <controls:NumericButton Value="{Binding IOStore.IOPort.OutClose}"/>
                     <!--<TextBox Text="{Binding IOStore.IOPort.OutClose}"/>-->
@@ -75,7 +90,7 @@
                     <TextBlock Text="{loc:Loc Re-Eject}"/>
                     <controls:NumericButton Value="{Binding IOStore.IOPort.OutReEject}"/>
                     <!--<TextBox Text="{Binding IOStore.IOPort.OutReEject}"/>-->
-                    <TextBlock Text="{loc:Loc Alram}"/>
+                    <TextBlock Text="{loc:Loc Alarm}"/>
                     <controls:NumericButton Value="{Binding IOStore.IOPort.OutAlram}"/>
                     <!--<TextBox Text="{Binding IOStore.IOPort.OutAlram}"/>-->
                     <TextBlock Text="{loc:Loc C/S}"/>

@@ -26,8 +26,11 @@ namespace Mold_Inspector.Service
             get => _inOpen;
             set
             {
-                if (_inDoor)
-                    SetProperty(ref _inOpen, value);
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                SetProperty(ref _inOpen, value);
             }
         }
 
@@ -37,8 +40,11 @@ namespace Mold_Inspector.Service
             get => _inEjected;
             set
             {
-                if (_inDoor)
-                    SetProperty(ref _inEjected, value);
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                SetProperty(ref _inEjected, value);
             }
         }
 
@@ -48,8 +54,11 @@ namespace Mold_Inspector.Service
             get => _inOK;
             set
             {
-                if (_inDoor)
-                    SetProperty(ref _inOK, value);
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                SetProperty(ref _inOK, value);
             }
         }
 
@@ -59,13 +68,14 @@ namespace Mold_Inspector.Service
             get => _inNG;
             set
             {
-                if (_inDoor)
-                {
-                    var prev = _inNG;
-                    SetProperty(ref _inNG, value);
-                    if (prev != _inNG && InNG)
-                        OutAlram = false;
-                }
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                var prev = _inNG;
+                SetProperty(ref _inNG, value);
+                if (prev != _inNG && InNG)
+                    OutAlram = false;
             }
         }
 
@@ -75,8 +85,11 @@ namespace Mold_Inspector.Service
             get => _inSet;
             set
             {
-                if (_inDoor)
-                    SetProperty(ref _inSet, value);
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                SetProperty(ref _inSet, value);
             }
         }
 
@@ -86,8 +99,11 @@ namespace Mold_Inspector.Service
             get => _inRestart;
             set
             {
-                if (_inDoor)
-                    SetProperty(ref _inRestart, value);
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
+                SetProperty(ref _inRestart, value);
             }
         }
 
@@ -110,9 +126,12 @@ namespace Mold_Inspector.Service
             get => _outClose;
             set
             {
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
                 SetProperty(ref _outClose, value);
-                if (_inDoor)
-                    _controller.Write(_ioStore.IOPort.OutClose, value);
+                _controller.Write(_ioStore.IOPort.OutClose, value);
             }
         }
 
@@ -122,9 +141,12 @@ namespace Mold_Inspector.Service
             get => _outEject;
             set
             {
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
                 SetProperty(ref _outEject, value);
-                if (_inDoor)
-                    _controller.Write(_ioStore.IOPort.OutEject, value);
+                _controller.Write(_ioStore.IOPort.OutEject, value);
             }
         }
 
@@ -134,9 +156,12 @@ namespace Mold_Inspector.Service
             get => _outRobot;
             set
             {
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
                 SetProperty(ref _outRobot, value);
-                if (_inDoor)
-                    _controller.Write(_ioStore.IOPort.OutRobot, value);
+                _controller.Write(_ioStore.IOPort.OutRobot, value);
             }
         }
 
@@ -146,9 +171,12 @@ namespace Mold_Inspector.Service
             get => _outReEject;
             set
             {
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
                 SetProperty(ref _outReEject, value);
-                if (_inDoor)
-                    _controller.Write(_ioStore.IOPort.OutReEject, value);
+                _controller.Write(_ioStore.IOPort.OutReEject, value);
             }
         }
 
@@ -169,6 +197,10 @@ namespace Mold_Inspector.Service
             get => _outCS;
             set
             {
+#if DEBUG == false 
+                if (_inDoor == false)
+                    return;
+#endif
                 SetProperty(ref _outCS, value);
                 if (_inDoor)
                     _controller.Write(_ioStore.IOPort.OutCS, value);
@@ -225,13 +257,13 @@ namespace Mold_Inspector.Service
 
         private void InChanged(bool[] datas)
         {
-            InOpen = !datas[_ioStore.IOPort.InOpen];
-            InEjected = !datas[_ioStore.IOPort.InEjected];
-            InOK = !datas[_ioStore.IOPort.InOK];
-            InNG = !datas[_ioStore.IOPort.InNG];
-            InSet = !datas[_ioStore.IOPort.InSet];
-            InRestart = !datas[_ioStore.IOPort.InRestart];
-            InDoor = !datas[_ioStore.IOPort.InDoor];
+            InOpen = datas[_ioStore.IOPort.InOpen];
+            InEjected = datas[_ioStore.IOPort.InEjected];
+            InOK = datas[_ioStore.IOPort.InOK];
+            InNG = datas[_ioStore.IOPort.InNG];
+            InSet = datas[_ioStore.IOPort.InSet];
+            InRestart = datas[_ioStore.IOPort.InRestart];
+            InDoor = datas[_ioStore.IOPort.InDoor];
         }
 
         public void Release()
@@ -410,8 +442,12 @@ namespace Mold_Inspector.Service
                             _inspectService.RefreshPattern(InspectMode.Mold);
                             _stateStore.TeachStateChanging();
                             break;
-                        case TeachState.Complate:
+                        case TeachState.Confirm:
                             _recipeStore.Save();
+                            _stateStore.TeachStateChanging();
+                            InSet = false;
+                            break;
+                        case TeachState.Wait:
                             _stateStore.TeachStateChanging();
                             StartAutoMode();
                             break;

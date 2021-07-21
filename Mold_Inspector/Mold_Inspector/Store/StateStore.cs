@@ -10,10 +10,12 @@ namespace Mold_Inspector.Store
 {
     enum TeachState
     { 
-        Prepare,
-        Production,
-        Mold,
-        Complate
+        Prepare = 1,
+        Production = 2,
+        Mold = 3,
+        Confirm = 4,
+        Wait = 5,
+        Complate = 6
     }
 
     class StateStore : BindableBase
@@ -29,6 +31,8 @@ namespace Mold_Inspector.Store
                 {
                     case TeachState.Production:
                     case TeachState.Mold:
+                    case TeachState.Confirm:
+                    case TeachState.Wait:
                         IsAutoEnable = false;
                         break;
                     case TeachState.Prepare:
@@ -172,11 +176,11 @@ namespace Mold_Inspector.Store
                 case TeachState.Prepare:
                 case TeachState.Production:
                 case TeachState.Mold:
+                case TeachState.Confirm:
                     TeachState++;
                     break;
-                case TeachState.Complate:
+                case TeachState.Wait:
                     IsAutoMode = true;
-                    IsTeachEnable = false;
                     break;
             }
         }
