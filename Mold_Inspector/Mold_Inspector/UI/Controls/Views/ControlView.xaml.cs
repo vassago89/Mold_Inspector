@@ -106,18 +106,26 @@ namespace Mold_Inspector.UI.Controls.Views
 
         private void MouseDownHandle(object sender, MouseButtonEventArgs e)
         {
-                switch (e.ChangedButton)
-                {
-                    case MouseButton.Left:
-                        _viewModel.MouseHandle(MouseAction.LeftClick, e);
-                        break;
-                    case MouseButton.Middle:
-                        _viewModel.MouseHandle(MouseAction.WheelClick, e);
-                        break;
-                    case MouseButton.Right:
-                        _viewModel.MouseHandle(MouseAction.RightClick, e);
-                        break;
-                }
+            Focus();
+            
+            if (e.ClickCount > 1)
+            {
+                _viewModel.CommandRelease();
+                return;
+            }
+
+            switch (e.ChangedButton)
+            {
+                case MouseButton.Left:
+                    _viewModel.MouseHandle(MouseAction.LeftClick, e);
+                    break;
+                case MouseButton.Middle:
+                    _viewModel.MouseHandle(MouseAction.WheelClick, e);
+                    break;
+                case MouseButton.Right:
+                    _viewModel.MouseHandle(MouseAction.RightClick, e);
+                    break;
+            }
         }
 
         private void MouseUpHandle(object sender, MouseButtonEventArgs e)
@@ -167,6 +175,18 @@ namespace Mold_Inspector.UI.Controls.Views
         private void MouseLeaveHandle(object sender, MouseEventArgs e)
         {
             _viewModel.Release();
+        }
+
+        private void KeyboardKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                _viewModel.RemoveWindows();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                _viewModel.CommandRelease();
+            }
         }
     }
 }

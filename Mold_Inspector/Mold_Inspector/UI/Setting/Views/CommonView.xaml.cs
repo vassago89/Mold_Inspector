@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mold_Inspector.UI.Setting.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,22 @@ namespace Mold_Inspector.UI.Setting.Views
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class SolidBrushToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            //var color = ((SolidColorBrush)value).Color;
+
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var pair = (KeyValuePair<String, Color>)value;
+            return pair.Value;
         }
     }
 

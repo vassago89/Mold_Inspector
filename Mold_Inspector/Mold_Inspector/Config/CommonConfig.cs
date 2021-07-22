@@ -23,6 +23,13 @@ namespace Mold_Inspector.Config
         public string Theme { get; set; }
         public Color AccentColor { get; set; }
         public string AccentName { get; set; }
+        
+        public Color PatternColor { get; set; }
+        public string PatternName { get; set; }
+        public Color BinaryColor { get; set; }
+        public string BinaryName { get; set; }
+        public Color ProfileColor { get; set; }
+        public string ProfileName { get; set; }
 
         public CommonConfig()
         {
@@ -35,6 +42,12 @@ namespace Mold_Inspector.Config
             Theme = "Light";
             AccentColor = Colors.SteelBlue;
             AccentName = "SteelBlue";
+            PatternColor = Colors.Yellow;
+            PatternName = "Yellow";
+            BinaryColor = Colors.Yellow;
+            BinaryName = "Yellow";
+            ProfileColor = Colors.Yellow;
+            ProfileName = "Yellow";
         }
     }
 }

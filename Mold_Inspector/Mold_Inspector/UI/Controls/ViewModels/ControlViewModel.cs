@@ -290,6 +290,19 @@ namespace Mold_Inspector.UI.Controls.ViewModels
             _mouseStore.Command = CommandState.None;
         }
 
+        public void RemoveWindows()
+        {
+            WindowStoreMediator.Instacne.RemoveWindows();
+            _teachingStore.Window = null;
+        }
+
+        public void CommandRelease()
+        {
+            _teachingStore.IsNone = true;
+            _mouseStore.Mouse = MouseState.None;
+            _mouseStore.Command = CommandState.None;
+        }
+
         private void SelectWindow(Model.Window selected)
         {
             _teachingStore.Window = selected;

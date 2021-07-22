@@ -12,6 +12,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <local:ColorToSolidBrushConverter x:Key="ColorToBrush"/>
+            <local:SolidBrushToColorConverter x:Key="BrushToColor"/>
+        </Grid.Resources>
         <StackPanel>
             <UniformGrid Columns="2">
                 <UniformGrid.Resources>
@@ -40,9 +44,39 @@
                 </ComboBox>
                 <TextBlock Text="{loc:Loc Accent}"/>
                 <ComboBox SelectedItem="{Binding Accent}" ItemsSource="{Binding Accents}" Margin="4" VerticalAlignment="Center" FontSize="18" BorderBrush="{DynamicResource SeparatorBackground}">
-                    <ComboBox.Resources>
-                        <local:ColorToSolidBrushConverter x:Key="ColorToBrush"/>
-                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderThickness="0" Height="20" Width="20" Background="{Binding Value, Converter={StaticResource ColorToBrush}}"/>
+                                <TextBlock Margin="4, 0" Text="{Binding Key}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="{loc:Loc Pattern}"/>
+                <ComboBox SelectedItem="{Binding Pattern}" ItemsSource="{Binding Accents}" Margin="4" VerticalAlignment="Center" FontSize="18" BorderBrush="{DynamicResource SeparatorBackground}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderThickness="0" Height="20" Width="20" Background="{Binding Value, Converter={StaticResource ColorToBrush}}"/>
+                                <TextBlock Margin="4, 0" Text="{Binding Key}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="{loc:Loc Binary}"/>
+                <ComboBox SelectedItem="{Binding Binary}" ItemsSource="{Binding Accents}" Margin="4" VerticalAlignment="Center" FontSize="18" BorderBrush="{DynamicResource SeparatorBackground}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderThickness="0" Height="20" Width="20" Background="{Binding Value, Converter={StaticResource ColorToBrush}}"/>
+                                <TextBlock Margin="4, 0" Text="{Binding Key}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="{loc:Loc Profile}"/>
+                <ComboBox SelectedItem="{Binding Profile}" ItemsSource="{Binding Accents}" Margin="4" VerticalAlignment="Center" FontSize="18" BorderBrush="{DynamicResource SeparatorBackground}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

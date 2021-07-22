@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Mold_Inspector.Model
 {
@@ -19,6 +20,26 @@ namespace Mold_Inspector.Model
         public Rectangle Region { get; set; }
         public IAlgorithm Algorithm { get; set; }
         
+        [field:NonSerialized]
+        public object Color
+        {   
+            get
+            {
+                switch (Algorithm.AlgorithmType)
+                {
+                    
+                    case AlgorithmType.Pattern:
+                        return App.Current.Resources["PatternBrush"];
+                    case AlgorithmType.Binary:
+                        return App.Current.Resources["BinaryBrush"];
+                    case AlgorithmType.Profile:
+                        return App.Current.Resources["ProfileBrush"];
+                }
+
+                return null;
+            }
+        }
+
         private Window()
         {
 

@@ -68,6 +68,48 @@ namespace Mold_Inspector.Store
             set => SetProperty(ref _accentName, value);
         }
 
+        private Color _patternColor;
+        public Color PatternColor
+        {
+            get => _patternColor;
+            set => SetProperty(ref _patternColor, value);
+        }
+
+        private string _patternName;
+        public string PatternName
+        {
+            get => _patternName;
+            set => SetProperty(ref _patternName, value);
+        }
+
+        private Color _binaryColor;
+        public Color BinaryColor
+        {
+            get => _binaryColor;
+            set => SetProperty(ref _binaryColor, value);
+        }
+
+        private string _binaryName;
+        public string BinaryName
+        {
+            get => _binaryName;
+            set => SetProperty(ref _binaryName, value);
+        }
+
+        private Color _profileColor;
+        public Color ProfileColor
+        {
+            get => _profileColor;
+            set => SetProperty(ref _profileColor, value);
+        }
+
+        private string _profileName;
+        public string ProfileName
+        {
+            get => _profileName;
+            set => SetProperty(ref _profileName, value);
+        }
+
         public CommonStore() : base()
         {
             
@@ -88,6 +130,13 @@ namespace Mold_Inspector.Store
             AccentColor = config.AccentColor;
             AccentName = config.AccentName;
             DefaultTarget = config.DefaultTarget;
+
+            PatternColor = config.PatternColor;
+            PatternName = config.PatternName;
+            ProfileColor = config.ProfileColor;
+            ProfileName = config.ProfileName;
+            BinaryColor = config.BinaryColor;
+            BinaryName = config.BinaryName;
         }
 
         protected override void CopyTo(CommonConfig config)
@@ -100,6 +149,13 @@ namespace Mold_Inspector.Store
             config.AccentColor = AccentColor;
             config.AccentName = AccentName;
             config.DefaultTarget = DefaultTarget;
+
+            config.PatternColor = PatternColor;
+            config.PatternName = PatternName;
+            config.ProfileColor = ProfileColor;
+            config.ProfileName = ProfileName;
+            config.BinaryColor = BinaryColor;
+            config.BinaryName = BinaryName;
         }
     }
 }

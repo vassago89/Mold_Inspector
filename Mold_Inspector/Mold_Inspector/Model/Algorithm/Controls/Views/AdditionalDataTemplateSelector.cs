@@ -21,4 +21,5 @@ namespace Mold_Inspector.Model.Algorithm.Controls.Views
             return fe.TryFindResource(algorithm.AlgorithmType.ToString()) as DataTemplate;
         }
     }
+
 }

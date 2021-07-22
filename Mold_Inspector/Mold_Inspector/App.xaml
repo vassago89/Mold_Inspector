@@ -10,6 +10,9 @@
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PatternBrush"/>
+            <SolidColorBrush x:Key="BinaryBrush"/>
+            <SolidColorBrush x:Key="ProfileBrush"/>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

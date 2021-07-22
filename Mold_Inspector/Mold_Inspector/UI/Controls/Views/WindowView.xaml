@@ -27,11 +27,11 @@
                               Height="{Binding Region.Height}"
                               Opacity="0.25">
                             <Rectangle StrokeDashArray="1 2"
-                                       Stroke="Yellow"
+                                       Stroke="{Binding Color}"
                                        StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
                             <TextBlock Text="{loc:Loc {Binding Algorithm.AlgorithmType}}" 
                                        FontSize="{Binding ZoomService.FontThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"
-                                       Foreground="Yellow">
+                                       Foreground="{Binding Color}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=TextBlock, Mode=FindAncestor}}"/>
                                 </TextBlock.RenderTransform>
@@ -49,11 +49,11 @@
                               Canvas.Top="{Binding Region.Y}"
                               Width="{Binding Region.Width}" 
                               Height="{Binding Region.Height}">
-                            <Rectangle Stroke="Yellow"
+                            <Rectangle Stroke="{Binding Color}"
                                        StrokeThickness="{Binding ZoomService.OverlayThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"/>
                             <TextBlock Text="{loc:Loc {Binding Algorithm.AlgorithmType}}" 
                                        FontSize="{Binding ZoomService.FontThickness, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:WindowView}}"
-                                       Foreground="Yellow">
+                                       Foreground="{Binding Color}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=TextBlock, Mode=FindAncestor}}"/>
                                 </TextBlock.RenderTransform>
@@ -107,7 +107,7 @@
                        Canvas.Top="{Binding WindowStore.Region.Y}"
                        Width="{Binding WindowStore.Region.Width}" 
                        Height="{Binding WindowStore.Region.Height}" 
-                       Stroke="Yellow"
+                       Stroke="{DynamicResource Accent}"
                        StrokeDashArray="1 2"
                        StrokeThickness="{Binding ZoomService.OverlayThickness}"/>
         </Canvas>

@@ -13,7 +13,7 @@ using System.Windows.Data;
 
 namespace Mold_Inspector.Store
 {
-    class RecipeStore : ConfigStore<RecipeConfig>
+    class RecipeStore : BindableBase
     {
         private Recipe _selected;
         public Recipe Selected
@@ -36,10 +36,27 @@ namespace Mold_Inspector.Store
         public ObservableCollection<Recipe> Recipes { get; set; }
         public Action RecipeChanged { get; set; }
 
+        private RecipeConfig _recipeConfig;
 
-        public RecipeStore() : base()
+        public RecipeStore(RecipeConfig recipeConfig) : base()
         {
+            _recipeConfig = recipeConfig;
+            _recipeConfig.Load();
+            Recipes = new ObservableCollection<Recipe>();
+            BindingOperations.EnableCollectionSynchronization(Recipes, new object());
 
+            CopyFrom(_recipeConfig);
+        }
+
+        ~RecipeStore()
+        {
+            Save();
+        }
+
+        public void Save()
+        {
+            CopyTo(_recipeConfig);
+            _recipeConfig.Save();
         }
 
         public bool AddRecipe(string name)
@@ -63,23 +80,17 @@ namespace Mold_Inspector.Store
         {
             Selected = recipe;
             Selected.LastUsedDate = DateTime.Now;
-            Save();
+            _recipeConfig.Save();
             RecipeChanged?.Invoke();
         }
 
-        protected override void Initialize()
-        {
-            Recipes = new ObservableCollection<Recipe>();
-            BindingOperations.EnableCollectionSynchronization(Recipes, new object());
-        }
-
-        protected override void CopyFrom(RecipeConfig config)
+        protected void CopyFrom(RecipeConfig config)
         {
             Recipes.Clear();
             Recipes.AddRange(config.Recipes);
         }
 
-        protected override void CopyTo(RecipeConfig config)
+        protected void CopyTo(RecipeConfig config)
         {
             config.Recipes = Recipes;
         }

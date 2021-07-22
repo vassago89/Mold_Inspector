@@ -57,7 +57,7 @@
     </Reference>
     <Reference Include="MvCameraControl.Net, Version=3.2.0.2, Culture=neutral, PublicKeyToken=52fddfb3f94be800, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\MVS\Development\DotNet\AnyCpu\MvCameraControl.Net.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\MVS\Development\DotNet\AnyCpu\MvCameraControl.Net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -144,7 +144,7 @@
     </Reference>
     <Reference Include="uEyeDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\IDS\uEye\Develop\DotNet\uEyeDotNet.dll</HintPath>
+      <HintPath>C:\Program Files\IDS\uEye\Develop\DotNet\uEyeDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
